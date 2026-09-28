@@ -69,14 +69,16 @@ namespace FlightLib
         // Restart
         public void Restart()
         {
-            this.finalPosition = this.initialPosition;
+            this.currentPosition = this.initialPosition;
         }
 
 
-        public double Distance(FlightPlan plan)
-        { 
-           res = plan.currentPosition - 
-        }
+        // double Distance(FlightPlan plan)
+        //{
+            //double dx = this.x - plan.GetX();
+            //double dy = this.y - plan.GetY();
+            //return Math.Sqrt(dx * dx + dy * dy);
+        //}
 
         public void Mover(double tiempo)
         // Mueve el vuelo a la posición correspondiente a viajar durante el tiempo que se recibe como parámetro
@@ -110,10 +112,7 @@ namespace FlightLib
             
             return resultado;
         }
-        public double Distance(FlightPlan plan)
-        {
-
-        }
+        
 
         public bool Conflicto(FlightPlan b, double distanciaSeguridad)
         {
