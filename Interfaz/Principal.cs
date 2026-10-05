@@ -13,6 +13,8 @@ namespace Interfaz
 {
     public partial class Principal : Form
     {
+        FlightPlan F1;
+        FlightPlan F2;
         public Principal()
         {
             InitializeComponent();
@@ -23,7 +25,10 @@ namespace Interfaz
         private void introducciónDeDatosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Data1 form = new Data1();
+            //recuperar fight plans
             form.ShowDialog();
+            F1 = form.GetFlightPlan1();
+            F2 = form.GetFlightPlan2();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -33,7 +38,21 @@ namespace Interfaz
 
         private void distanciasDeSeguridadYTiemposDeCicloToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Data2 form = new Data2();
+            form.ShowDialog();
+        }
 
+        private void simulaciónDeVuelosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (F1 != null && F2 != null)
+            {
+                SimulacionVuelos form = new SimulacionVuelos(F1, F2);
+                form.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Por favor, introduzca los datos de los vuelos antes de iniciar la simulación.");
+            }
         }
     }
 }

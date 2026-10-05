@@ -33,6 +33,7 @@
             this.menúSimulacionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.introducciónDeDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.distanciasDeSeguridadYTiemposDeCicloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.simulaciónDeVuelosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,7 +61,8 @@
             // 
             this.menúSimulacionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.introducciónDeDatosToolStripMenuItem,
-            this.distanciasDeSeguridadYTiemposDeCicloToolStripMenuItem});
+            this.distanciasDeSeguridadYTiemposDeCicloToolStripMenuItem,
+            this.simulaciónDeVuelosToolStripMenuItem});
             this.menúSimulacionToolStripMenuItem.Name = "menúSimulacionToolStripMenuItem";
             this.menúSimulacionToolStripMenuItem.Size = new System.Drawing.Size(162, 29);
             this.menúSimulacionToolStripMenuItem.Text = "Menú simulacion";
@@ -78,6 +80,13 @@
             this.distanciasDeSeguridadYTiemposDeCicloToolStripMenuItem.Size = new System.Drawing.Size(451, 34);
             this.distanciasDeSeguridadYTiemposDeCicloToolStripMenuItem.Text = "Distancias de seguridad y tiempos de ciclo";
             this.distanciasDeSeguridadYTiemposDeCicloToolStripMenuItem.Click += new System.EventHandler(this.distanciasDeSeguridadYTiemposDeCicloToolStripMenuItem_Click);
+            // 
+            // simulaciónDeVuelosToolStripMenuItem
+            // 
+            this.simulaciónDeVuelosToolStripMenuItem.Name = "simulaciónDeVuelosToolStripMenuItem";
+            this.simulaciónDeVuelosToolStripMenuItem.Size = new System.Drawing.Size(451, 34);
+            this.simulaciónDeVuelosToolStripMenuItem.Text = "Simulación de vuelos";
+            this.simulaciónDeVuelosToolStripMenuItem.Click += new System.EventHandler(this.simulaciónDeVuelosToolStripMenuItem_Click);
             // 
             // Principal
             // 
@@ -102,6 +111,7 @@
         private System.Windows.Forms.ToolStripMenuItem menúSimulacionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem introducciónDeDatosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem distanciasDeSeguridadYTiemposDeCicloToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem simulaciónDeVuelosToolStripMenuItem;
     }
 }
 

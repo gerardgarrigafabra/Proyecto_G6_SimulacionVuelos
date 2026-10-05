@@ -17,14 +17,15 @@ namespace Interfaz
         {
             InitializeComponent();
         }
-
+        FlightPlan F1;
+        FlightPlan F2;
         private void buttonInsertar_Click(object sender, EventArgs e)
         {
             try
             {
 
-                FlightPlan F1 = new FlightPlan(id1.Text, Convert.ToDouble(initialPositionX1.Text), Convert.ToDouble(initialPositionY1.Text), Convert.ToDouble(finalPositionX1.Text), Convert.ToDouble(finalPositionY1.Text), Convert.ToDouble(velocidad1.Text));
-                FlightPlan F2 = new FlightPlan(id2.Text, Convert.ToDouble(initialPositionX2.Text), Convert.ToDouble(initialPositionY1.Text), Convert.ToDouble(finalPositionX2.Text), Convert.ToDouble(finalPositionY2.Text), Convert.ToDouble(velocidad2.Text));
+                F1 = new FlightPlan(id1.Text, Convert.ToDouble(initialPositionX1.Text), Convert.ToDouble(initialPositionY1.Text), Convert.ToDouble(finalPositionX1.Text), Convert.ToDouble(finalPositionY1.Text), Convert.ToDouble(velocidad1.Text));
+                F2 = new FlightPlan(id2.Text, Convert.ToDouble(initialPositionX2.Text), Convert.ToDouble(initialPositionY1.Text), Convert.ToDouble(finalPositionX2.Text), Convert.ToDouble(finalPositionY2.Text), Convert.ToDouble(velocidad2.Text));
                 MessageBox.Show("Datos cargados correctamente");
             }
             catch (FormatException)
@@ -36,6 +37,16 @@ namespace Interfaz
         private void buttonCerrar_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        public FlightPlan GetFlightPlan1()
+        {
+            return F1;
+        }
+
+        public FlightPlan GetFlightPlan2()
+        {
+            return F2;
         }
     }
 }

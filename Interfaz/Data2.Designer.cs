@@ -33,6 +33,7 @@
             this.distanciaSeguridad1 = new System.Windows.Forms.TextBox();
             this.tiempoCiclo1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.Cerrar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label3
@@ -77,11 +78,22 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // Cerrar
+            // 
+            this.Cerrar.Location = new System.Drawing.Point(309, 347);
+            this.Cerrar.Name = "Cerrar";
+            this.Cerrar.Size = new System.Drawing.Size(77, 29);
+            this.Cerrar.TabIndex = 11;
+            this.Cerrar.Text = "Cerrar";
+            this.Cerrar.UseVisualStyleBackColor = true;
+            this.Cerrar.Click += new System.EventHandler(this.Cerrar_Click);
+            // 
             // Data2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(398, 388);
+            this.Controls.Add(this.Cerrar);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.tiempoCiclo1);
             this.Controls.Add(this.distanciaSeguridad1);
@@ -100,5 +112,6 @@
         private System.Windows.Forms.TextBox distanciaSeguridad1;
         private System.Windows.Forms.TextBox tiempoCiclo1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button Cerrar;
     }
 }

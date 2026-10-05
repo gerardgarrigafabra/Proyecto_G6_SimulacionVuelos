@@ -23,12 +23,17 @@ namespace Interfaz
             {
                 int tiempoCiclo = Convert.ToInt32(tiempoCiclo1.Text);
                 int distSeguridad = Convert.ToInt32(distanciaSeguridad1.Text);
-
+                MessageBox.Show("Datos introducidos correctamente");
             }
             catch(FormatException)
             {
                 MessageBox.Show("ERROR");
             }
+        }
+
+        private void Cerrar_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
