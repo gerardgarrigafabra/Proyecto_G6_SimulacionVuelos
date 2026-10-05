@@ -12,6 +12,8 @@ namespace Interfaz
 {
     public partial class Data2 : Form
     {
+        int tiempoCiclo;
+        int distSeguridad;
         public Data2()
         {
             InitializeComponent();
@@ -21,9 +23,10 @@ namespace Interfaz
         {
             try
             {
-                int tiempoCiclo = Convert.ToInt32(tiempoCiclo1.Text);
-                int distSeguridad = Convert.ToInt32(distanciaSeguridad1.Text);
+                tiempoCiclo = Convert.ToInt32(tiempoCiclo1.Text);
+                distSeguridad = Convert.ToInt32(distanciaSeguridad1.Text);
                 MessageBox.Show("Datos introducidos correctamente");
+                
             }
             catch(FormatException)
             {
@@ -34,6 +37,15 @@ namespace Interfaz
         private void Cerrar_Click(object sender, EventArgs e)
         {
             Close();
+        }
+        
+        private int GetTiempoCiclo()
+        {
+            return tiempoCiclo;
+        }
+        private int GetDistanciaSeguridad()
+        {
+            return distSeguridad;
         }
     }
 }

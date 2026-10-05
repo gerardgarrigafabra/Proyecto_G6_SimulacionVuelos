@@ -15,6 +15,8 @@ namespace Interfaz
     {
         FlightPlan F1;
         FlightPlan F2;
+        int tiempoCiclo;
+        int distSeguridad;
         public Principal()
         {
             InitializeComponent();
@@ -40,6 +42,9 @@ namespace Interfaz
         {
             Data2 form = new Data2();
             form.ShowDialog();
+            tiempoCiclo = form.GetTiempoCiclo();
+            distSeguridad = form.GetDistanciaSeguridad();
+            
         }
 
         private void simulaciónDeVuelosToolStripMenuItem_Click(object sender, EventArgs e)
