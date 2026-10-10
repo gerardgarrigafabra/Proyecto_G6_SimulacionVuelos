@@ -49,9 +49,9 @@ namespace Interfaz
 
         private void simulaciónDeVuelosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (F1 != null && F2 != null)
+            if (F1 != null && F2 != null && tiempoCiclo != 0)
             {
-                SimulacionVuelos form = new SimulacionVuelos(F1, F2);
+                SimulacionVuelos form = new SimulacionVuelos(F1, F2, tiempoCiclo);
                 form.ShowDialog();
             }
             else

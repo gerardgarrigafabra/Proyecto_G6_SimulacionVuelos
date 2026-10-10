@@ -45,6 +45,15 @@ namespace FlightLib
             return this.velocidad;
         }
 
+        public void SetInitialPosition(Position initialPosition)
+        {
+            this.initialPosition = initialPosition;
+        }
+
+        public Position GetInitialPosition()
+        {
+            return this.initialPosition;
+        }
 
         public void SetCurrentPosition(Position currentPosition)
         {

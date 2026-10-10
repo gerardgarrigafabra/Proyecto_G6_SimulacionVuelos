@@ -41,8 +41,9 @@
             this.Panel.BackColor = System.Drawing.SystemColors.ControlDark;
             this.Panel.Location = new System.Drawing.Point(634, 50);
             this.Panel.Name = "Panel";
-            this.Panel.Size = new System.Drawing.Size(600, 600);
+            this.Panel.Size = new System.Drawing.Size(599, 599);
             this.Panel.TabIndex = 0;
+            this.Panel.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel_Paint);
             // 
             // label1
             // 

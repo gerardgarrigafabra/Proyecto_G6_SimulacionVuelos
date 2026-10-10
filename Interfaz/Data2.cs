@@ -39,13 +39,15 @@ namespace Interfaz
             Close();
         }
         
-        private int GetTiempoCiclo()
+        public int GetTiempoCiclo()
         {
             return tiempoCiclo;
         }
-        private int GetDistanciaSeguridad()
+        public int GetDistanciaSeguridad()
         {
             return distSeguridad;
         }
+
+
     }
 }
