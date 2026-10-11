@@ -51,7 +51,7 @@ namespace Interfaz
         {
             if (F1 != null && F2 != null && tiempoCiclo != 0)
             {
-                SimulacionVuelos form = new SimulacionVuelos(F1, F2, tiempoCiclo);
+                SimulacionVuelos form = new SimulacionVuelos(F1, F2, tiempoCiclo, distSeguridad);
                 form.ShowDialog();
             }
             else

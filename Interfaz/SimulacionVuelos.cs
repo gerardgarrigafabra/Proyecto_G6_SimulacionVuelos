@@ -18,13 +18,16 @@ namespace Interfaz
         int tiempoCiclo;
         PictureBox avion1, avion2;
 
+        int distanciaSeguridad;
 
-        public SimulacionVuelos(FlightPlan F1, FlightPlan F2, int tiempoCiclo)
+
+        public SimulacionVuelos(FlightPlan F1, FlightPlan F2, int tiempoCiclo, int distSeguridad)
         {
             InitializeComponent();
             this.F1 = F1;
             this.F2 = F2;
             this.tiempoCiclo = tiempoCiclo;
+            this.distanciaSeguridad = distSeguridad;
         }
 
         private void Panel_Paint(object sender, PaintEventArgs e)
@@ -86,5 +89,12 @@ namespace Interfaz
             form.ShowDialog();
         }
 
+        private void dist_sec(object sender, EventArgs e)
+        {
+            if (F1.Conflicto(F2, distanciaSeguridad) == true)
+            {
+                //Pintar la elipse.
+            }
+        }
     }
 }
