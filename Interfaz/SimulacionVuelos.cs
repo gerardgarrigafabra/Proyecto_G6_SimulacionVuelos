@@ -54,6 +54,11 @@ namespace Interfaz
             // resto 10 para corregir la posicion del avion y que se vea centrado
             avion1.Location = new Point(Convert.ToInt32(F1.GetCurrentPosition().GetX())-10, Convert.ToInt32(F1.GetCurrentPosition().GetY())-10);
             avion2.Location = new Point(Convert.ToInt32(F2.GetCurrentPosition().GetX())-1, Convert.ToInt32(F2.GetCurrentPosition().GetY())-10);
+
+            if (F1.Conflicto(F2, distanciaSeguridad) == true)
+            {
+                // Pintar la elipse
+            }
         }
 
         
