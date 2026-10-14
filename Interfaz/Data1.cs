@@ -25,7 +25,7 @@ namespace Interfaz
             {
 
                 F1 = new FlightPlan(id1.Text, Convert.ToDouble(initialPositionX1.Text), Convert.ToDouble(initialPositionY1.Text), Convert.ToDouble(finalPositionX1.Text), Convert.ToDouble(finalPositionY1.Text), Convert.ToDouble(velocidad1.Text));
-                F2 = new FlightPlan(id2.Text, Convert.ToDouble(initialPositionX2.Text), Convert.ToDouble(initialPositionY1.Text), Convert.ToDouble(finalPositionX2.Text), Convert.ToDouble(finalPositionY2.Text), Convert.ToDouble(velocidad2.Text));
+                F2 = new FlightPlan(id2.Text, Convert.ToDouble(initialPositionX2.Text), Convert.ToDouble(initialPositionY2.Text), Convert.ToDouble(finalPositionX2.Text), Convert.ToDouble(finalPositionY2.Text), Convert.ToDouble(velocidad2.Text));
                 MessageBox.Show("Datos cargados correctamente");
             }
             catch (FormatException)

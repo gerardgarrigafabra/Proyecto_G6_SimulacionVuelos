@@ -51,13 +51,39 @@ namespace Interfaz
             F1.Mover(tiempoCiclo);
             F2.Mover(tiempoCiclo);
 
+            Panel.Refresh();
+
             // resto 10 para corregir la posicion del avion y que se vea centrado
             avion1.Location = new Point(Convert.ToInt32(F1.GetCurrentPosition().GetX())-10, Convert.ToInt32(F1.GetCurrentPosition().GetY())-10);
-            avion2.Location = new Point(Convert.ToInt32(F2.GetCurrentPosition().GetX())-1, Convert.ToInt32(F2.GetCurrentPosition().GetY())-10);
+            avion2.Location = new Point(Convert.ToInt32(F2.GetCurrentPosition().GetX())-10, Convert.ToInt32(F2.GetCurrentPosition().GetY())-10);
 
             if (F1.Conflicto(F2, distanciaSeguridad) == true)
             {
-                // Pintar la elipse
+                
+                using (Graphics g = Panel.CreateGraphics())
+                using (Pen pen = new Pen(Color.Orange, 2))
+                {
+                    int radio = distanciaSeguridad;
+                    int diametro = radio * 2;
+
+                    // Elipse alrededor del primer avión
+                    g.DrawEllipse(
+                        pen,
+                        (float)F1.GetCurrentPosition().GetX() - radio,
+                        (float)F1.GetCurrentPosition().GetY() - radio,
+                        diametro,
+                        diametro
+                    );
+
+                    // Elipse alrededor del segundo avión
+                    g.DrawEllipse(
+                        pen,
+                        (float)F2.GetCurrentPosition().GetX() - radio,
+                        (float)F2.GetCurrentPosition().GetY() - radio,
+                        diametro,
+                        diametro
+                    );
+                }
             }
         }
 
@@ -65,11 +91,17 @@ namespace Interfaz
 
         private void SimulacionVuelos_Load(object sender, EventArgs e)
         {
+            Panel.Dock = DockStyle.None;
+            Panel.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+            Panel.Size = new Size(500, 500);
+            Panel.MinimumSize = new Size(500, 500);
+            Panel.MaximumSize = new Size(500, 500);
+
             avion1 = new PictureBox();
             avion1.Size = new Size(20, 20);
             avion1.SizeMode = PictureBoxSizeMode.StretchImage;
             avion1.Image = new Bitmap("Avion.gif");
-            avion1.Location = new Point(Convert.ToInt32(F1.GetCurrentPosition().GetX()), Convert.ToInt32(F1.GetCurrentPosition().GetY()));
+            avion1.Location = new Point(Convert.ToInt32(F1.GetCurrentPosition().GetX()) - (avion1.Width / 2), Convert.ToInt32(F1.GetCurrentPosition().GetY()) - (avion1.Width / 2));
             avion1.Tag = F1;
             avion1.Click += new System.EventHandler(this.evento);
             Panel.Controls.Add(avion1);
@@ -78,7 +110,7 @@ namespace Interfaz
             avion2.Size = new Size(20, 20);
             avion2.SizeMode = PictureBoxSizeMode.StretchImage;
             avion2.Image = new Bitmap("Avion.gif");
-            avion2.Location = new Point(Convert.ToInt32(F2.GetCurrentPosition().GetX()), Convert.ToInt32(F2.GetCurrentPosition().GetY()));
+            avion2.Location = new Point(Convert.ToInt32(F2.GetCurrentPosition().GetX()) - (avion2.Width / 2), Convert.ToInt32(F2.GetCurrentPosition().GetY()) - (avion2.Width / 2));
             avion2.Tag = F2;
             avion2.Click += new System.EventHandler(this.evento);
             Panel.Controls.Add(avion2);
@@ -94,12 +126,5 @@ namespace Interfaz
             form.ShowDialog();
         }
 
-        private void dist_sec(object sender, EventArgs e)
-        {
-            if (F1.Conflicto(F2, distanciaSeguridad) == true)
-            {
-                //Pintar la elipse.
-            }
-        }
     }
 }
