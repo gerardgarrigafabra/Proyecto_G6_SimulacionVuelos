@@ -28,12 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.Panel = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.Mover = new System.Windows.Forms.Button();
+            this.AutoMov = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // Panel
@@ -42,7 +45,7 @@
             this.Panel.Location = new System.Drawing.Point(564, 40);
             this.Panel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Panel.Name = "Panel";
-            this.Panel.Size = new System.Drawing.Size(500, 500);
+            this.Panel.Size = new System.Drawing.Size(581, 552);
             this.Panel.TabIndex = 0;
             this.Panel.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel_Paint);
             // 
@@ -70,7 +73,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.label3.Location = new System.Drawing.Point(495, 490);
+            this.label3.Location = new System.Drawing.Point(499, 561);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(59, 31);
             this.label3.TabIndex = 2;
@@ -80,7 +83,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.label4.Location = new System.Drawing.Point(1034, 8);
+            this.label4.Location = new System.Drawing.Point(1086, 7);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 31);
             this.label4.TabIndex = 3;
@@ -88,20 +91,35 @@
             // 
             // Mover
             // 
-            this.Mover.Location = new System.Drawing.Point(89, 178);
+            this.Mover.Location = new System.Drawing.Point(181, 172);
             this.Mover.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Mover.Name = "Mover";
-            this.Mover.Size = new System.Drawing.Size(299, 163);
+            this.Mover.Size = new System.Drawing.Size(171, 84);
             this.Mover.TabIndex = 4;
             this.Mover.Text = "Mover Vuelos";
             this.Mover.UseVisualStyleBackColor = true;
             this.Mover.Click += new System.EventHandler(this.Mover_Click);
+            // 
+            // AutoMov
+            // 
+            this.AutoMov.Location = new System.Drawing.Point(181, 286);
+            this.AutoMov.Name = "AutoMov";
+            this.AutoMov.Size = new System.Drawing.Size(171, 87);
+            this.AutoMov.TabIndex = 5;
+            this.AutoMov.Text = "Movimiento Automatico";
+            this.AutoMov.UseVisualStyleBackColor = true;
+            this.AutoMov.Click += new System.EventHandler(this.MovAuto_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.Mover_Click);
             // 
             // SimulacionVuelos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1432, 847);
+            this.Controls.Add(this.AutoMov);
             this.Controls.Add(this.Mover);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -125,5 +143,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button Mover;
+        private System.Windows.Forms.Button AutoMov;
+        private System.Windows.Forms.Timer timer1;
     }
 }

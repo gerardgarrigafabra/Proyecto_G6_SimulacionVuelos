@@ -87,7 +87,22 @@ namespace Interfaz
             }
         }
 
-        
+        private void MovAuto_Click(object sender, EventArgs e)
+        {
+            if (AutoMov.Text == "Movimiento Automatico")
+            {
+                timer1.Interval = 100;
+                timer1.Start();
+
+                AutoMov.Text = "PARAR";
+            }
+            else
+            {
+                timer1.Stop();
+                AutoMov.Text = "Movimiento Automatico";
+            }
+        }
+
 
         private void SimulacionVuelos_Load(object sender, EventArgs e)
         {
