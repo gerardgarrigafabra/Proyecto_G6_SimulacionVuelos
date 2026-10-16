@@ -38,6 +38,8 @@
             this.AutoMov = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.button1 = new System.Windows.Forms.Button();
+            this.buttonConflicto = new System.Windows.Forms.Button();
+            this.labelAlarma = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Panel
@@ -124,12 +126,36 @@
             this.button1.Text = "Mostar Vuelos";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            //
+            // buttonConflicto
+            //
+            this.buttonConflicto.Location = new System.Drawing.Point(181, 487);
+            this.buttonConflicto.Name = "buttonConflicto";
+            this.buttonConflicto.Size = new System.Drawing.Size(171, 77);
+            this.buttonConflicto.TabIndex = 7;
+            this.buttonConflicto.Text = "¿Habrá conflicto?";
+            this.buttonConflicto.UseVisualStyleBackColor = true;
+            this.buttonConflicto.Click += new System.EventHandler(this.buttonConflicto_Click);
+            //
+            // labelAlarma
+            //
+            this.labelAlarma.AutoSize = true;
+            this.labelAlarma.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.labelAlarma.ForeColor = System.Drawing.Color.Red;
+            this.labelAlarma.Location = new System.Drawing.Point(30, 620);
+            this.labelAlarma.Name = "labelAlarma";
+            this.labelAlarma.Size = new System.Drawing.Size(200, 25);
+            this.labelAlarma.TabIndex = 8;
+            this.labelAlarma.Text = "ALERTA";
+            this.labelAlarma.Visible = false;
             // 
             // SimulacionVuelos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1432, 847);
+            this.Controls.Add(this.labelAlarma);
+            this.Controls.Add(this.buttonConflicto);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.AutoMov);
             this.Controls.Add(this.Mover);
@@ -158,5 +184,7 @@
         private System.Windows.Forms.Button AutoMov;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonConflicto;
+        private System.Windows.Forms.Label labelAlarma;
     }
 }

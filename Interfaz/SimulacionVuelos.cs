@@ -54,12 +54,16 @@ namespace Interfaz
             Panel.Refresh();
 
             // resto 10 para corregir la posicion del avion y que se vea centrado
-            avion1.Location = new Point(Convert.ToInt32(F1.GetCurrentPosition().GetX())-10, Convert.ToInt32(F1.GetCurrentPosition().GetY())-10);
-            avion2.Location = new Point(Convert.ToInt32(F2.GetCurrentPosition().GetX())-10, Convert.ToInt32(F2.GetCurrentPosition().GetY())-10);
+            avion1.Location = new Point(Convert.ToInt32(F1.GetCurrentPosition().GetX()) - 10, Convert.ToInt32(F1.GetCurrentPosition().GetY()) - 10);
+            avion2.Location = new Point(Convert.ToInt32(F2.GetCurrentPosition().GetX()) - 10, Convert.ToInt32(F2.GetCurrentPosition().GetY()) - 10);
 
             if (F1.Conflicto(F2, distanciaSeguridad) == true)
             {
-                
+                // FASE 10: aviso al usuario de que los vuelos estan a menos de la distancia de seguridad
+                double distancia = F1.GetCurrentPosition().Distancia(F2.GetCurrentPosition());
+                labelAlarma.Text = "¡ALERTA! Distancia entre vuelos: " + distancia.ToString("F2");
+                labelAlarma.Visible = true;
+
                 using (Graphics g = Panel.CreateGraphics())
                 using (Pen pen = new Pen(Color.Orange, 2))
                 {
@@ -85,6 +89,45 @@ namespace Interfaz
                     );
                 }
             }
+            else
+            {
+                // Si ya no hay conflicto, quito el aviso
+                labelAlarma.Visible = false;
+            }
+        }
+
+        // FASE 10: informa de si los vuelos entraran en conflicto o no
+        private void buttonConflicto_Click(object sender, EventArgs e)
+        {
+            // Trabajo con copias de los vuelos (desde su posicion actual),
+            // asi los vuelos reales de la simulacion no se mueven
+            FlightPlan plan_a = new FlightPlan(F1.GetId(), F1.GetCurrentPosition().GetX(), F1.GetCurrentPosition().GetY(),
+                F1.GetFinalPosition().GetX(), F1.GetFinalPosition().GetY(), F1.GetVelocidad());
+            FlightPlan plan_b = new FlightPlan(F2.GetId(), F2.GetCurrentPosition().GetX(), F2.GetCurrentPosition().GetY(),
+                F2.GetFinalPosition().GetX(), F2.GetFinalPosition().GetY(), F2.GetVelocidad());
+
+            // Si ya empiezan en conflicto no hace falta simular
+            bool conflicto = plan_a.Conflicto(plan_b, distanciaSeguridad);
+
+            int ciclos = 0;
+            int maxCiclos = 100000; // limite para no quedarnos en un bucle infinito (por ejemplo con velocidad 0)
+
+            // Simulo ciclo a ciclo hasta que los dos lleguen o se detecte conflicto
+            while (conflicto == false && (plan_a.HasArrived() == false || plan_b.HasArrived() == false) && ciclos < maxCiclos)
+            {
+                plan_a.Mover(tiempoCiclo);
+                plan_b.Mover(tiempoCiclo);
+
+                if (plan_a.Conflicto(plan_b, distanciaSeguridad) == true)
+                    conflicto = true;
+
+                ciclos = ciclos + 1;
+            }
+
+            if (conflicto == true)
+                MessageBox.Show("Los vuelos entrarán en conflicto.");
+            else
+                MessageBox.Show("Los vuelos no entrarán en conflicto.");
         }
 
         private void MovAuto_Click(object sender, EventArgs e)
