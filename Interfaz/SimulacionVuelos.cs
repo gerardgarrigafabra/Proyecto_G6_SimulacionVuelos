@@ -103,6 +103,11 @@ namespace Interfaz
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DataGridForm form = new DataGridForm(F1, F2);
+            form.ShowDialog();
+        }
 
         private void SimulacionVuelos_Load(object sender, EventArgs e)
         {
