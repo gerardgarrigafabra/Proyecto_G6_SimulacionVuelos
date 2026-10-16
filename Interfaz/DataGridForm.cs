@@ -21,19 +21,26 @@ namespace Interfaz
             this.F1 = F1;
             this.F2 = F2;
         }
-        
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int Fila = e.RowIndex;
+            PlaneDistance form = new PlaneDistance(F1, F2, Fila);
+            form.ShowDialog();
+        }
+
         private void DataGridForm_Load(object sender, EventArgs e)
         {
 
             dataGridView1.Columns.Add("Col1", "ID");
-            dataGridView1.Columns.Add("Col2", "Estado");
-            dataGridView1.Columns.Add("Col3", "Velocidad");
-            dataGridView1.Columns.Add("Col4", "Posicion");
-            dataGridView1.Columns.Add("Col5", "Destino");
+            dataGridView1.Columns.Add("Col2", "Velocidad");
+            dataGridView1.Columns.Add("Col3", "Posicion");
+            dataGridView1.Columns.Add("Col4", "Destino");
 
-            dataGridView1.Rows.Add(F1.GetId(), "", F1.GetVelocidad(), F1.GetCurrentPosition().GetX().ToString("F2") +", "+ F1.GetCurrentPosition().GetY().ToString("F2"), F1.GetFinalPosition().GetX().ToString("F2") + ", "+ F1.GetFinalPosition().GetY().ToString("F2"));
-            dataGridView1.Rows.Add(F2.GetId(), "", F2.GetVelocidad(), F2.GetCurrentPosition().GetX().ToString("F2") + ", " + F2.GetCurrentPosition().GetY().ToString("F2"), F2.GetFinalPosition().GetX().ToString("F2") + ", " + F2.GetFinalPosition().GetY().ToString("F2"));
+            dataGridView1.Rows.Add(F1.GetId(), F1.GetVelocidad(), F1.GetCurrentPosition().GetX().ToString("F2") +", "+ F1.GetCurrentPosition().GetY().ToString("F2"), F1.GetFinalPosition().GetX().ToString("F2") + ", "+ F1.GetFinalPosition().GetY().ToString("F2"));
+            dataGridView1.Rows.Add(F2.GetId(), F2.GetVelocidad(), F2.GetCurrentPosition().GetX().ToString("F2") + ", " + F2.GetCurrentPosition().GetY().ToString("F2"), F2.GetFinalPosition().GetX().ToString("F2") + ", " + F2.GetFinalPosition().GetY().ToString("F2"));
 
         }
+
     }
 }
