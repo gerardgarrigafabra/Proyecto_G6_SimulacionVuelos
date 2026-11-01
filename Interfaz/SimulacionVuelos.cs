@@ -152,6 +152,22 @@ namespace Interfaz
             form.ShowDialog();
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            int nuevaVel = Convert.ToInt32(textBox2.Text);
+            string id = textBox1.Text;
+
+           
+            if (id == F1.GetId())
+            {
+                F1.SetVelocidad(nuevaVel);
+            }
+            if (id == F2.GetId())
+            {
+                F2.SetVelocidad(nuevaVel);
+            }
+        }
+
         private void SimulacionVuelos_Load(object sender, EventArgs e)
         {
             Panel.Dock = DockStyle.None;

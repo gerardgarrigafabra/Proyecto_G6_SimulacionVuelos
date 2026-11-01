@@ -40,6 +40,11 @@
             this.button1 = new System.Windows.Forms.Button();
             this.buttonConflicto = new System.Windows.Forms.Button();
             this.labelAlarma = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.LabelIdCv = new System.Windows.Forms.Label();
+            this.labelNuevaVel = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // Panel
@@ -48,7 +53,7 @@
             this.Panel.Location = new System.Drawing.Point(564, 40);
             this.Panel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Panel.Name = "Panel";
-            this.Panel.Size = new System.Drawing.Size(581, 552);
+            this.Panel.Size = new System.Drawing.Size(654, 618);
             this.Panel.TabIndex = 0;
             this.Panel.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel_Paint);
             // 
@@ -76,7 +81,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.label3.Location = new System.Drawing.Point(499, 561);
+            this.label3.Location = new System.Drawing.Point(497, 627);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(59, 31);
             this.label3.TabIndex = 2;
@@ -86,7 +91,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.label4.Location = new System.Drawing.Point(1086, 7);
+            this.label4.Location = new System.Drawing.Point(1159, 7);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 31);
             this.label4.TabIndex = 3;
@@ -94,7 +99,7 @@
             // 
             // Mover
             // 
-            this.Mover.Location = new System.Drawing.Point(181, 159);
+            this.Mover.Location = new System.Drawing.Point(181, 83);
             this.Mover.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Mover.Name = "Mover";
             this.Mover.Size = new System.Drawing.Size(171, 84);
@@ -105,7 +110,7 @@
             // 
             // AutoMov
             // 
-            this.AutoMov.Location = new System.Drawing.Point(181, 269);
+            this.AutoMov.Location = new System.Drawing.Point(181, 188);
             this.AutoMov.Name = "AutoMov";
             this.AutoMov.Size = new System.Drawing.Size(171, 87);
             this.AutoMov.TabIndex = 5;
@@ -119,41 +124,88 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(181, 387);
+            this.button1.Location = new System.Drawing.Point(181, 300);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(171, 77);
             this.button1.TabIndex = 6;
             this.button1.Text = "Mostar Vuelos";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            //
+            // 
             // buttonConflicto
-            //
-            this.buttonConflicto.Location = new System.Drawing.Point(181, 487);
+            // 
+            this.buttonConflicto.Location = new System.Drawing.Point(181, 397);
             this.buttonConflicto.Name = "buttonConflicto";
             this.buttonConflicto.Size = new System.Drawing.Size(171, 77);
             this.buttonConflicto.TabIndex = 7;
             this.buttonConflicto.Text = "¿Habrá conflicto?";
             this.buttonConflicto.UseVisualStyleBackColor = true;
             this.buttonConflicto.Click += new System.EventHandler(this.buttonConflicto_Click);
-            //
+            // 
             // labelAlarma
-            //
+            // 
             this.labelAlarma.AutoSize = true;
             this.labelAlarma.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.labelAlarma.ForeColor = System.Drawing.Color.Red;
             this.labelAlarma.Location = new System.Drawing.Point(30, 620);
             this.labelAlarma.Name = "labelAlarma";
-            this.labelAlarma.Size = new System.Drawing.Size(200, 25);
+            this.labelAlarma.Size = new System.Drawing.Size(96, 25);
             this.labelAlarma.TabIndex = 8;
             this.labelAlarma.Text = "ALERTA";
             this.labelAlarma.Visible = false;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(35, 501);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(171, 78);
+            this.button2.TabIndex = 9;
+            this.button2.Text = "Canviar Velocidad";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // LabelIdCv
+            // 
+            this.LabelIdCv.AutoSize = true;
+            this.LabelIdCv.Location = new System.Drawing.Point(314, 520);
+            this.LabelIdCv.Name = "LabelIdCv";
+            this.LabelIdCv.Size = new System.Drawing.Size(20, 16);
+            this.LabelIdCv.TabIndex = 10;
+            this.LabelIdCv.Text = "ID";
+            // 
+            // labelNuevaVel
+            // 
+            this.labelNuevaVel.AutoSize = true;
+            this.labelNuevaVel.Location = new System.Drawing.Point(222, 554);
+            this.labelNuevaVel.Name = "labelNuevaVel";
+            this.labelNuevaVel.Size = new System.Drawing.Size(112, 16);
+            this.labelNuevaVel.TabIndex = 11;
+            this.labelNuevaVel.Text = "Nueva Velocidad";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(359, 517);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 22);
+            this.textBox1.TabIndex = 12;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(359, 548);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 22);
+            this.textBox2.TabIndex = 13;
             // 
             // SimulacionVuelos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1432, 847);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.labelNuevaVel);
+            this.Controls.Add(this.LabelIdCv);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.labelAlarma);
             this.Controls.Add(this.buttonConflicto);
             this.Controls.Add(this.button1);
@@ -186,5 +238,10 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button buttonConflicto;
         private System.Windows.Forms.Label labelAlarma;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label LabelIdCv;
+        private System.Windows.Forms.Label labelNuevaVel;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox2;
     }
 }
