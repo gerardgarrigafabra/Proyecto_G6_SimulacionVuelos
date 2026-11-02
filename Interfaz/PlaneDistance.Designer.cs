@@ -35,28 +35,29 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(50, 78);
+            this.label1.Location = new System.Drawing.Point(56, 98);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(63, 16);
+            this.label1.Size = new System.Drawing.Size(79, 20);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Distance:";
+            this.label1.Text = "Distancia:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(152, 78);
+            this.label2.Location = new System.Drawing.Point(171, 98);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 16);
+            this.label2.Size = new System.Drawing.Size(51, 20);
             this.label2.TabIndex = 1;
             this.label2.Text = "label2";
             // 
             // PlaneDistance
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(269, 170);
+            this.ClientSize = new System.Drawing.Size(303, 212);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "PlaneDistance";
             this.Text = "PlaneDistance";
             this.Load += new System.EventHandler(this.PlaneDistance_Load);
