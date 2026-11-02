@@ -9,6 +9,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Interfaz
 {
@@ -155,34 +156,39 @@ namespace Interfaz
             form.ShowDialog();
         }
 
-        private void CambiarVelocidadBtn_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
             try
             {
-                int nuevaVel = Convert.ToInt32(textBoxNuevaVelocidad.Text);
-                string id = textBoxID.Text;
-
-
-                if (id == F1.GetId() || id == F2.GetId())
+                int nuevaVel = Convert.ToInt32(textBox2.Text);
+                string id = textBox1.Text;
+                if (nuevaVel > 0)
                 {
-                    if (id == F1.GetId())
+                    if (id == F1.GetId() || id == F2.GetId())
                     {
-                        F1.SetVelocidad(nuevaVel);
-                        F1.Restart();
-                        F2.Restart();
-                        MessageBox.Show("Velocidad del vuelo 1 cambiada a " + nuevaVel);
+                        if (id == F1.GetId())
+                        {
+                            F1.SetVelocidad(nuevaVel);
+                            F1.Restart();
+                            F2.Restart();
+                            MessageBox.Show("Velocidad del vuelo 1 cambiada a " + nuevaVel);
+                        }
+                        if (id == F2.GetId())
+                        {
+                            F2.SetVelocidad(nuevaVel);
+                            F1.Restart();
+                            F2.Restart();
+                            MessageBox.Show("Velocidad del vuelo 2 cambiada a " + nuevaVel);
+                        }
                     }
-                    if (id == F2.GetId())
+                    else
                     {
-                        F2.SetVelocidad(nuevaVel);
-                        F1.Restart();
-                        F2.Restart();
-                        MessageBox.Show("Velocidad del vuelo 2 cambiada a " + nuevaVel);
+                        MessageBox.Show("No existe ningun vuelo con ese ID");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("No existe ningun vuelo con ese ID");
+                    MessageBox.Show("Introduce un numero entero positivo");
                 }
             }
             catch (FormatException)
@@ -190,6 +196,7 @@ namespace Interfaz
                 MessageBox.Show("Introduce un numero entero");
             }
         }
+
 
         private void SimulacionVuelos_Load(object sender, EventArgs e)
         {
