@@ -114,6 +114,7 @@
             this.id1.Name = "id1";
             this.id1.Size = new System.Drawing.Size(100, 26);
             this.id1.TabIndex = 6;
+            this.id1.Text = "A";
             // 
             // velocidad1
             // 
@@ -121,6 +122,7 @@
             this.velocidad1.Name = "velocidad1";
             this.velocidad1.Size = new System.Drawing.Size(100, 26);
             this.velocidad1.TabIndex = 8;
+            this.velocidad1.Text = "10";
             // 
             // finalPositionX1
             // 
@@ -128,6 +130,7 @@
             this.finalPositionX1.Name = "finalPositionX1";
             this.finalPositionX1.Size = new System.Drawing.Size(100, 26);
             this.finalPositionX1.TabIndex = 9;
+            this.finalPositionX1.Text = "200";
             // 
             // initialPositionX1
             // 
@@ -135,6 +138,7 @@
             this.initialPositionX1.Name = "initialPositionX1";
             this.initialPositionX1.Size = new System.Drawing.Size(100, 26);
             this.initialPositionX1.TabIndex = 10;
+            this.initialPositionX1.Text = "1";
             // 
             // initialPositionX2
             // 
@@ -142,6 +146,7 @@
             this.initialPositionX2.Name = "initialPositionX2";
             this.initialPositionX2.Size = new System.Drawing.Size(100, 26);
             this.initialPositionX2.TabIndex = 18;
+            this.initialPositionX2.Text = "200";
             // 
             // finalPositionX2
             // 
@@ -149,6 +154,7 @@
             this.finalPositionX2.Name = "finalPositionX2";
             this.finalPositionX2.Size = new System.Drawing.Size(100, 26);
             this.finalPositionX2.TabIndex = 17;
+            this.finalPositionX2.Text = "1";
             // 
             // velocidad2
             // 
@@ -156,6 +162,7 @@
             this.velocidad2.Name = "velocidad2";
             this.velocidad2.Size = new System.Drawing.Size(100, 26);
             this.velocidad2.TabIndex = 16;
+            this.velocidad2.Text = "10";
             // 
             // id2
             // 
@@ -163,6 +170,7 @@
             this.id2.Name = "id2";
             this.id2.Size = new System.Drawing.Size(100, 26);
             this.id2.TabIndex = 15;
+            this.id2.Text = "B";
             // 
             // label7
             // 
@@ -226,6 +234,7 @@
             this.initialPositionY1.Name = "initialPositionY1";
             this.initialPositionY1.Size = new System.Drawing.Size(100, 26);
             this.initialPositionY1.TabIndex = 21;
+            this.initialPositionY1.Text = "1";
             // 
             // finalPositionY1
             // 
@@ -233,6 +242,7 @@
             this.finalPositionY1.Name = "finalPositionY1";
             this.finalPositionY1.Size = new System.Drawing.Size(100, 26);
             this.finalPositionY1.TabIndex = 22;
+            this.finalPositionY1.Text = "200";
             // 
             // finalPositionY2
             // 
@@ -240,6 +250,7 @@
             this.finalPositionY2.Name = "finalPositionY2";
             this.finalPositionY2.Size = new System.Drawing.Size(100, 26);
             this.finalPositionY2.TabIndex = 24;
+            this.finalPositionY2.Text = "200";
             // 
             // initialPositionY2
             // 
@@ -247,6 +258,7 @@
             this.initialPositionY2.Name = "initialPositionY2";
             this.initialPositionY2.Size = new System.Drawing.Size(100, 26);
             this.initialPositionY2.TabIndex = 23;
+            this.initialPositionY2.Text = "1";
             // 
             // Data1
             // 

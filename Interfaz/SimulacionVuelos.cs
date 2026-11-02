@@ -32,17 +32,44 @@ namespace Interfaz
 
         private void Panel_Paint(object sender, PaintEventArgs e)
         {
-            Pen myPen = new Pen(Color.Red);
+            Pen myPen1 = new Pen(Color.Blue);
+            Pen myPen2 = new Pen(Color.Green);
 
-            e.Graphics.DrawLine(myPen,
+            e.Graphics.DrawLine(myPen1,
                 (float)F1.GetInitialPosition().GetX(), (float)F1.GetInitialPosition().GetY(),
                 (float)F1.GetFinalPosition().GetX(), (float)F1.GetFinalPosition().GetY());
 
-            e.Graphics.DrawLine(myPen,
+            e.Graphics.DrawLine(myPen2,
                 (float)F2.GetInitialPosition().GetX(), (float)F2.GetInitialPosition().GetY(),
                 (float)F2.GetFinalPosition().GetX(), (float)F2.GetFinalPosition().GetY());
 
-            myPen.Dispose();
+            myPen1.Dispose();
+            myPen2.Dispose();
+
+            using (Graphics g = Panel.CreateGraphics())
+            using (Pen pen = new Pen(Color.Red, 2))
+            {
+                int radio = distanciaSeguridad;
+                int diametro = radio * 2;
+
+                // Elipse alrededor del primer avión
+                g.DrawEllipse(
+                    pen,
+                    (float)F1.GetCurrentPosition().GetX() - radio,
+                    (float)F1.GetCurrentPosition().GetY() - radio,
+                    diametro,
+                    diametro
+                );
+
+                // Elipse alrededor del segundo avión
+                g.DrawEllipse(
+                    pen,
+                    (float)F2.GetCurrentPosition().GetX() - radio,
+                    (float)F2.GetCurrentPosition().GetY() - radio,
+                    diametro,
+                    diametro
+                );
+            }
         }
 
         private void Mover_Click(object sender, EventArgs e)
@@ -64,30 +91,6 @@ namespace Interfaz
                 labelAlarma.Text = "¡ALERTA! Distancia entre vuelos: " + distancia.ToString("F2");
                 labelAlarma.Visible = true;
 
-                using (Graphics g = Panel.CreateGraphics())
-                using (Pen pen = new Pen(Color.Orange, 2))
-                {
-                    int radio = distanciaSeguridad;
-                    int diametro = radio * 2;
-
-                    // Elipse alrededor del primer avión
-                    g.DrawEllipse(
-                        pen,
-                        (float)F1.GetCurrentPosition().GetX() - radio,
-                        (float)F1.GetCurrentPosition().GetY() - radio,
-                        diametro,
-                        diametro
-                    );
-
-                    // Elipse alrededor del segundo avión
-                    g.DrawEllipse(
-                        pen,
-                        (float)F2.GetCurrentPosition().GetX() - radio,
-                        (float)F2.GetCurrentPosition().GetY() - radio,
-                        diametro,
-                        diametro
-                    );
-                }
             }
             else
             {

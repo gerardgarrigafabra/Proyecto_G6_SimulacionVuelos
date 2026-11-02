@@ -60,6 +60,7 @@
             this.distanciaSeguridad1.Name = "distanciaSeguridad1";
             this.distanciaSeguridad1.Size = new System.Drawing.Size(100, 26);
             this.distanciaSeguridad1.TabIndex = 6;
+            this.distanciaSeguridad1.Text = "10";
             // 
             // tiempoCiclo1
             // 
@@ -67,6 +68,7 @@
             this.tiempoCiclo1.Name = "tiempoCiclo1";
             this.tiempoCiclo1.Size = new System.Drawing.Size(100, 26);
             this.tiempoCiclo1.TabIndex = 7;
+            this.tiempoCiclo1.Text = "10";
             // 
             // button1
             // 
