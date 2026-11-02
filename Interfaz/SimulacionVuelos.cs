@@ -157,17 +157,32 @@ namespace Interfaz
 
         private void button2_Click(object sender, EventArgs e)
         {
-            int nuevaVel = Convert.ToInt32(textBox2.Text);
-            string id = textBox1.Text;
+            try
+            {
+                int nuevaVel = Convert.ToInt32(textBox2.Text);
+                string id = textBox1.Text;
 
-           
-            if (id == F1.GetId())
-            {
-                F1.SetVelocidad(nuevaVel);
+
+                if (id == F1.GetId())
+                {
+                    F1.SetVelocidad(nuevaVel);
+                    F1.Restart();
+                    F2.Restart();
+                }
+                if (id == F2.GetId())
+                {
+                    F2.SetVelocidad(nuevaVel);
+                    F2.Restart();
+                    F2.Restart();
+                }
+                else
+                {
+                    MessageBox.Show("No existe ningun vuelo con ese ID");
+                }
             }
-            if (id == F2.GetId())
+            catch (FormatException)
             {
-                F2.SetVelocidad(nuevaVel);
+                MessageBox.Show("Introduce un numero entero");
             }
         }
 
