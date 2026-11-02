@@ -27,7 +27,7 @@ namespace Interfaz
         private void PlaneDistance_Load(object sender, EventArgs e)
         {
 
-            label2.Text = F1.Distancia(F2).ToString();
+            valor.Text = F1.Distancia(F2).ToString();
         }
 
 

@@ -19,14 +19,18 @@ namespace Interfaz
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonCargar_Click(object sender, EventArgs e)
         {
             try
             {
                 tiempoCiclo = Convert.ToInt32(tiempoCiclo1.Text);
                 distSeguridad = Convert.ToInt32(distanciaSeguridad1.Text);
                 MessageBox.Show("Datos introducidos correctamente");
-                
+                if (tiempoCiclo < 0 || distSeguridad < 0)
+                {
+                    MessageBox.Show("ERROR: Los valores no pueden ser negativos");
+                }
+
             }
             catch(FormatException)
             {
