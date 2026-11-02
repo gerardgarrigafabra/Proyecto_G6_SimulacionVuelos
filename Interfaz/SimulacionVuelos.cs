@@ -156,12 +156,12 @@ namespace Interfaz
             form.ShowDialog();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void CambiarVelocidadBtn_Click(object sender, EventArgs e)
         {
             try
             {
-                int nuevaVel = Convert.ToInt32(textBox2.Text);
-                string id = textBox1.Text;
+                int nuevaVel = Convert.ToInt32(textBoxNuevaVelocidad.Text);
+                string id = textBoxID.Text;
                 if (nuevaVel > 0)
                 {
                     if (id == F1.GetId() || id == F2.GetId())
