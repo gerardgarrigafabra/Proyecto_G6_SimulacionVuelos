@@ -149,18 +149,18 @@ namespace Interfaz
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void MoverVuelosBtn_Click(object sender, EventArgs e)
         {
             DataGridForm form = new DataGridForm(F1, F2);
             form.ShowDialog();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void CambiarVelocidadBtn_Click(object sender, EventArgs e)
         {
             try
             {
-                int nuevaVel = Convert.ToInt32(textBox2.Text);
-                string id = textBox1.Text;
+                int nuevaVel = Convert.ToInt32(textBoxNuevaVelocidad.Text);
+                string id = textBoxID.Text;
 
 
                 if (id == F1.GetId() || id == F2.GetId())
