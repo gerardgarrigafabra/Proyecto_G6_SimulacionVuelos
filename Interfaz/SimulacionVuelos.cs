@@ -163,17 +163,22 @@ namespace Interfaz
                 string id = textBox1.Text;
 
 
-                if (id == F1.GetId())
+                if (id == F1.GetId() || id == F2.GetId())
                 {
-                    F1.SetVelocidad(nuevaVel);
-                    F1.Restart();
-                    F2.Restart();
-                }
-                if (id == F2.GetId())
-                {
-                    F2.SetVelocidad(nuevaVel);
-                    F2.Restart();
-                    F2.Restart();
+                    if (id == F1.GetId())
+                    {
+                        F1.SetVelocidad(nuevaVel);
+                        F1.Restart();
+                        F2.Restart();
+                        MessageBox.Show("Velocidad del vuelo 1 cambiada a " + nuevaVel);
+                    }
+                    if (id == F2.GetId())
+                    {
+                        F2.SetVelocidad(nuevaVel);
+                        F1.Restart();
+                        F2.Restart();
+                        MessageBox.Show("Velocidad del vuelo 2 cambiada a " + nuevaVel);
+                    }
                 }
                 else
                 {
