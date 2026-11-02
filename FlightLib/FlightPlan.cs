@@ -95,7 +95,7 @@ namespace FlightLib
             double distancia = tiempo * this.velocidad / 60;
 
             //Calculamos las razones trigonométricas
-            double hipotenusa = Math.Sqrt((finalPosition.GetX() - currentPosition.GetX()) * (finalPosition.GetX() - currentPosition.GetX()) + (finalPosition.GetY() - currentPosition.GetY()) * (finalPosition.GetY() - currentPosition.GetY()));
+            double hipotenusa = currentPosition.Distancia(finalPosition);
             double coseno = (finalPosition.GetX() - currentPosition.GetX()) / hipotenusa;
             double seno = (finalPosition.GetY() - currentPosition.GetY()) / hipotenusa;
 
@@ -125,7 +125,7 @@ namespace FlightLib
         public bool Conflicto(FlightPlan b, double distanciaSeguridad)
         {
             bool conflicto = false;
-            if (this.currentPosition.Distancia(b.currentPosition) < distanciaSeguridad)
+            if (this.Distancia(b) < distanciaSeguridad)
                 conflicto = true;
             return conflicto;
         }
