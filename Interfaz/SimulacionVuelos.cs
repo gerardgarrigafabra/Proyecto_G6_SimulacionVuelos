@@ -166,10 +166,14 @@ namespace Interfaz
                 if (id == F1.GetId())
                 {
                     F1.SetVelocidad(nuevaVel);
+                    F1.Restart();
+                    F2.Restart();
                 }
                 if (id == F2.GetId())
                 {
                     F2.SetVelocidad(nuevaVel);
+                    F2.Restart();
+                    F2.Restart();
                 }
                 else
                 {
