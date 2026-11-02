@@ -81,13 +81,12 @@ namespace FlightLib
             this.currentPosition = this.initialPosition;
         }
 
+        public double Distancia(FlightPlan plan)
+        {
+            return this.currentPosition.Distancia(plan.currentPosition);
+        }
 
-        // double Distance(FlightPlan plan)
-        //{
-            //double dx = this.x - plan.GetX();
-            //double dy = this.y - plan.GetY();
-            //return Math.Sqrt(dx * dx + dy * dy);
-        //}
+
 
         public void Mover(double tiempo)
         // Mueve el vuelo a la posición correspondiente a viajar durante el tiempo que se recibe como parámetro
