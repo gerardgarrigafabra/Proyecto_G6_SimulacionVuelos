@@ -14,9 +14,10 @@ namespace SimulatorConsole
         {
             FlightPlanList lista = new FlightPlanList();
             try
-            {       
+            {    
+                
                 Console.WriteLine("Escribe el identificador");
-                //   string nombre = Console.ReadLine();
+                   string nombre = Console.ReadLine();
                 string identificador = Console.ReadLine(); ;
 
                 Console.WriteLine("Escribe la velocidad");

@@ -13,8 +13,10 @@ namespace Interfaz
 {
     public partial class Principal : Form
     {
+        List<FlightPlan> listaAviones = new List<FlightPlan>();
         FlightPlan F1;
         FlightPlan F2;
+
         int tiempoCiclo;
         int distSeguridad;
         public Principal()
@@ -27,10 +29,20 @@ namespace Interfaz
         private void introducciónDeDatosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Data1 form = new Data1();
-            //recuperar fight plans
+
             form.ShowDialog();
-            F1 = form.GetFlightPlan1();
-            F2 = form.GetFlightPlan2();
+
+            listaAviones = form.GetFlightPlans();
+
+            if (listaAviones.Count == 2)
+            {
+                F1 = listaAviones[0];
+                F2 = listaAviones[1];
+            }
+            else
+            {
+                MessageBox.Show("Por favor, introduzca los datos de los dos vuelos.");
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -51,27 +63,13 @@ namespace Interfaz
         {
             if (F1 != null && F2 != null && tiempoCiclo != 0)
             {
-                // FASE 11: antes de simular compruebo si los vuelos entraran en conflicto.
-                // Uso copias de los vuelos (desde su posicion actual) para no moverlos de verdad
-                FlightPlan plan_a = new FlightPlan(F1.GetId(), F1.GetCurrentPosition().GetX(), F1.GetCurrentPosition().GetY(),
-                    F1.GetFinalPosition().GetX(), F1.GetFinalPosition().GetY(), F1.GetVelocidad());
-                FlightPlan plan_b = new FlightPlan(F2.GetId(), F2.GetCurrentPosition().GetX(), F2.GetCurrentPosition().GetY(),
-                    F2.GetFinalPosition().GetX(), F2.GetFinalPosition().GetY(), F2.GetVelocidad());
+                // Respecte la fase 11 les copies i la simulació ja es tenen en compte a flightplanlist.cs i aqui nomes creo una llista de comprovació de conflicte
+                FlightPlanList listaComprobacion = new FlightPlanList();
 
-                bool conflicto = plan_a.Conflicto(plan_b, distSeguridad);
-                int ciclos = 0;
-                int maxCiclos = 100000; // limite para evitar bucles infinitos
+                listaComprobacion.AddFlightPlan(F1);
+                listaComprobacion.AddFlightPlan(F2);
 
-                while (conflicto == false && (plan_a.HasArrived() == false || plan_b.HasArrived() == false) && ciclos < maxCiclos)
-                {
-                    plan_a.Mover(tiempoCiclo);
-                    plan_b.Mover(tiempoCiclo);
-
-                    if (plan_a.Conflicto(plan_b, distSeguridad) == true)
-                        conflicto = true;
-
-                    ciclos = ciclos + 1;
-                }
+                bool conflicto = listaComprobacion.HabraConflicto(tiempoCiclo, distSeguridad);
 
                 if (conflicto == true)
                 {
@@ -89,25 +87,32 @@ namespace Interfaz
                         {
                             velocidadNueva = velocidadNueva * 0.95;
 
-                            // Copias nuevas, el vuelo 2 con la velocidad nueva
-                            plan_a = new FlightPlan(F1.GetId(), F1.GetCurrentPosition().GetX(), F1.GetCurrentPosition().GetY(),
-                                F1.GetFinalPosition().GetX(), F1.GetFinalPosition().GetY(), F1.GetVelocidad());
-                            plan_b = new FlightPlan(F2.GetId(), F2.GetCurrentPosition().GetX(), F2.GetCurrentPosition().GetY(),
-                                F2.GetFinalPosition().GetX(), F2.GetFinalPosition().GetY(), velocidadNueva);
+                            // Utilitzo copies per anar modificant la nova evelocitat
+                            FlightPlan plan_a = new FlightPlan(
+                                F1.GetId(),
+                                F1.GetCurrentPosition().GetX(),
+                                F1.GetCurrentPosition().GetY(),
+                                F1.GetFinalPosition().GetX(),
+                                F1.GetFinalPosition().GetY(),
+                                F1.GetVelocidad()
+                            );
 
-                            conflicto = plan_a.Conflicto(plan_b, distSeguridad);
-                            ciclos = 0;
+                            FlightPlan plan_b = new FlightPlan(
+                                F2.GetId(),
+                                F2.GetCurrentPosition().GetX(),
+                                F2.GetCurrentPosition().GetY(),
+                                F2.GetFinalPosition().GetX(),
+                                F2.GetFinalPosition().GetY(),
+                                velocidadNueva
+                            );
 
-                            while (conflicto == false && (plan_a.HasArrived() == false || plan_b.HasArrived() == false) && ciclos < maxCiclos)
-                            {
-                                plan_a.Mover(tiempoCiclo);
-                                plan_b.Mover(tiempoCiclo);
+                            //comprovem amb llista
+                            FlightPlanList listaPrueba = new FlightPlanList();
 
-                                if (plan_a.Conflicto(plan_b, distSeguridad) == true)
-                                    conflicto = true;
+                            listaPrueba.AddFlightPlan(plan_a);
+                            listaPrueba.AddFlightPlan(plan_b);
 
-                                ciclos = ciclos + 1;
-                            }
+                            conflicto = listaPrueba.HabraConflicto(tiempoCiclo, distSeguridad);
 
                             intentos = intentos + 1;
                         }

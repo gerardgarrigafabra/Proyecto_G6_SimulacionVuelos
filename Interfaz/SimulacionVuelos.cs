@@ -15,7 +15,7 @@ namespace Interfaz
     {
         FlightPlan F1, F2;
         int tiempoCiclo;
-        PictureBox avion1, avion2;
+        List<PictureBox> listaPictureBoxes = new List<PictureBox>(); // Llista de pictureboxes
 
         int distanciaSeguridad;
 
@@ -80,20 +80,31 @@ namespace Interfaz
             Panel.Refresh();
 
             // resto 10 para corregir la posicion del avion y que se vea centrado
-            avion1.Location = new Point(Convert.ToInt32(F1.GetCurrentPosition().GetX()) - 10, Convert.ToInt32(F1.GetCurrentPosition().GetY()) - 10);
-            avion2.Location = new Point(Convert.ToInt32(F2.GetCurrentPosition().GetX()) - 10, Convert.ToInt32(F2.GetCurrentPosition().GetY()) - 10);
+            // Actualizo la posicion de todos los PictureBoxes
+            listaPictureBoxes[0].Location = new Point(
+                Convert.ToInt32(F1.GetCurrentPosition().GetX()) - 10,
+                Convert.ToInt32(F1.GetCurrentPosition().GetY()) - 10
+            );
 
-            if (F1.Conflicto(F2, distanciaSeguridad) == true)
+            listaPictureBoxes[1].Location = new Point(
+                Convert.ToInt32(F2.GetCurrentPosition().GetX()) - 10,
+                Convert.ToInt32(F2.GetCurrentPosition().GetY()) - 10
+            );
+
+            FlightPlanList listaActual = new FlightPlanList();
+
+            listaActual.AddFlightPlan(F1);
+            listaActual.AddFlightPlan(F2);
+
+            if (listaActual.HayConflicto(distanciaSeguridad))
             {
-                // FASE 10: aviso al usuario de que los vuelos estan a menos de la distancia de seguridad
                 double distancia = F1.GetCurrentPosition().Distancia(F2.GetCurrentPosition());
+
                 labelAlarma.Text = "¡ALERTA! Distancia entre vuelos: " + distancia.ToString("F2");
                 labelAlarma.Visible = true;
-
             }
             else
             {
-                // Si ya no hay conflicto, quito el aviso
                 labelAlarma.Visible = false;
             }
         }
@@ -101,30 +112,12 @@ namespace Interfaz
         // FASE 10: informa de si los vuelos entraran en conflicto o no
         private void buttonConflicto_Click(object sender, EventArgs e)
         {
-            // Trabajo con copias de los vuelos (desde su posicion actual),
-            // asi los vuelos reales de la simulacion no se mueven
-            FlightPlan plan_a = new FlightPlan(F1.GetId(), F1.GetCurrentPosition().GetX(), F1.GetCurrentPosition().GetY(),
-                F1.GetFinalPosition().GetX(), F1.GetFinalPosition().GetY(), F1.GetVelocidad());
-            FlightPlan plan_b = new FlightPlan(F2.GetId(), F2.GetCurrentPosition().GetX(), F2.GetCurrentPosition().GetY(),
-                F2.GetFinalPosition().GetX(), F2.GetFinalPosition().GetY(), F2.GetVelocidad());
+            FlightPlanList listaComprobacion = new FlightPlanList();
 
-            // Si ya empiezan en conflicto no hace falta simular
-            bool conflicto = plan_a.Conflicto(plan_b, distanciaSeguridad);
+            listaComprobacion.AddFlightPlan(F1);
+            listaComprobacion.AddFlightPlan(F2);
 
-            int ciclos = 0;
-            int maxCiclos = 100000; // limite para no quedarnos en un bucle infinito (por ejemplo con velocidad 0)
-
-            // Simulo ciclo a ciclo hasta que los dos lleguen o se detecte conflicto
-            while (conflicto == false && (plan_a.HasArrived() == false || plan_b.HasArrived() == false) && ciclos < maxCiclos)
-            {
-                plan_a.Mover(tiempoCiclo);
-                plan_b.Mover(tiempoCiclo);
-
-                if (plan_a.Conflicto(plan_b, distanciaSeguridad) == true)
-                    conflicto = true;
-
-                ciclos = ciclos + 1;
-            }
+            bool conflicto = listaComprobacion.HabraConflicto(tiempoCiclo, distanciaSeguridad); //habraconflicto fa lo de copies ja
 
             if (conflicto == true)
                 MessageBox.Show("Los vuelos entrarán en conflicto.");
@@ -204,22 +197,41 @@ namespace Interfaz
             Panel.MinimumSize = new Size(500, 500);
             Panel.MaximumSize = new Size(500, 500);
 
-            avion1 = new PictureBox();
+            // primer PictureBox
+            PictureBox avion1 = new PictureBox();
+
             avion1.Size = new Size(20, 20);
             avion1.SizeMode = PictureBoxSizeMode.StretchImage;
             avion1.Image = new Bitmap("Avion.gif");
-            avion1.Location = new Point(Convert.ToInt32(F1.GetCurrentPosition().GetX()) - (avion1.Width / 2), Convert.ToInt32(F1.GetCurrentPosition().GetY()) - (avion1.Width / 2));
+
+            avion1.Location = new Point(
+                Convert.ToInt32(F1.GetCurrentPosition().GetX()) - 10,
+                Convert.ToInt32(F1.GetCurrentPosition().GetY()) - 10
+            );
+
             avion1.Tag = F1;
             avion1.Click += new System.EventHandler(this.evento);
+
+            listaPictureBoxes.Add(avion1);
             Panel.Controls.Add(avion1);
 
-            avion2 = new PictureBox();
+
+            // segon PictureBox
+            PictureBox avion2 = new PictureBox();
+
             avion2.Size = new Size(20, 20);
             avion2.SizeMode = PictureBoxSizeMode.StretchImage;
             avion2.Image = new Bitmap("Avion.gif");
-            avion2.Location = new Point(Convert.ToInt32(F2.GetCurrentPosition().GetX()) - (avion2.Width / 2), Convert.ToInt32(F2.GetCurrentPosition().GetY()) - (avion2.Width / 2));
+
+            avion2.Location = new Point(
+                Convert.ToInt32(F2.GetCurrentPosition().GetX()) - 10,
+                Convert.ToInt32(F2.GetCurrentPosition().GetY()) - 10
+            );
+
             avion2.Tag = F2;
             avion2.Click += new System.EventHandler(this.evento);
+
+            listaPictureBoxes.Add(avion2);
             Panel.Controls.Add(avion2);
 
         }
