@@ -46,7 +46,7 @@ namespace Interfaz
                     return;
                 }
 
-                listaAviones.Clear();
+                listaAviones.Clear();  // Si volem posar més de 2 avions a la llista, aquesta línea s'ha de eliminar.
 
                 listaAviones.Add(F1);
                 listaAviones.Add(F2);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -162,6 +163,74 @@ namespace FlightLib
                 }
             }
             return conflicto;
+        }
+
+        public bool ResolverConflictosLista(double distanciaSeguridad)
+        {
+            List<FlightPlan> copias = new List<FlightPlan>();
+
+            int i = 0;
+
+            while (i < vector.Count)
+            {
+                FlightPlan original = vector[i];
+
+                FlightPlan copia = new FlightPlan(
+                    original.GetId(),
+                    original.GetCurrentPosition().GetX(),
+                    original.GetCurrentPosition().GetY(),
+                    original.GetFinalPosition().GetX(),
+                    original.GetFinalPosition().GetY(),
+                    original.GetVelocidad()
+                );
+
+                copias.Add(copia);
+                i++;
+            }
+
+            int ciclos = 0;
+            int ciclosmax = 40;
+
+            bool hayConflicto = true;
+
+            while (hayConflicto == true && ciclos < ciclosmax)
+            {
+                hayConflicto = false;
+
+                i = 0;
+
+                while (i < copias.Count)
+                {
+                    int j = i + 1;
+
+                    while (j < copias.Count)
+                    {
+                        if (copias[i].DistanciaMinima(copias[j]) < distanciaSeguridad)
+                        {
+                            hayConflicto = true;
+
+                            double nuevaVelocidad = copias[j].GetVelocidad() * 0.95;
+
+                            copias[j].SetVelocidad(nuevaVelocidad);
+                        }
+
+                        j++;
+                    }
+
+                    i++;
+                }
+
+                ciclos++;
+            }
+
+            if (hayConflicto == true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

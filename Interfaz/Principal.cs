@@ -93,6 +93,8 @@ namespace Interfaz
                             intentos = intentos + 1;
                         }
 
+                        conflicto = listaComprobacion.ResolverConflictosLista(distSeguridad);
+
                         if (conflicto == false)
                         {
                             // Cambio la velocidad del vuelo real y se simulará con la nueva velocidad
