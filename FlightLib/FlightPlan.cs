@@ -121,149 +121,119 @@ namespace FlightLib
             return resultado;
         }
         // distancia min x segment
-        private void ComprobarTramo(
-            double rx, double ry,
-            double vx, double vy,
-            double duracion,
-            double tiempoInicio,
-            ref double distanciaMinima,
-            ref double tiempoMinimo) //ref pq no pren valor det
+        
+        
+        private double DistanciaTramo(double rx, double ry, double vx, double vy, double duracion)
         {
             double velocidadCuadrado = vx * vx + vy * vy;
             double tiempo = 0;
 
             if (velocidadCuadrado > 0)
             {
-                // Igualamos la derivada a cero y despejamos el tiempo
-                tiempo = -(rx * vx + ry * vy) / velocidadCuadrado; // (x,y) + vt per a cda pt //REVISAR
+                tiempo = -(rx * vx + ry * vy) / velocidadCuadrado;
             }
+
+            // El mínimo ha d'estar dins tram
             if (tiempo < 0)
                 tiempo = 0;
-
             if (tiempo > duracion)
                 tiempo = duracion;
 
-            // dist recorreguda en el temps equivalent al min.
+          
             double x = rx + vx * tiempo;
             double y = ry + vy * tiempo;
 
-            double distancia = Math.Sqrt(x * x + y * y);
+            return Math.Sqrt(x * x + y * y);
 
-            // Actualizamos si hemos encontrado una distancia menor
-            if (distancia < distanciaMinima)
-            {
-                distanciaMinima = distancia;
-                tiempoMinimo = tiempoInicio + tiempo;
-            }
         }
-        // Calculem dist min amb la funció de dist derivada i igualada a 0
-        public double DistanciaMinima(FlightPlan otro, out double tiempoMinimo)
+        public double DistanciaMinima(FlightPlan otro)
         {
             Position posicionA = this.GetCurrentPosition();
             Position posicionB = otro.GetCurrentPosition();
 
+            // Posición de A respecte  B
             double rx = posicionA.GetX() - posicionB.GetX();
             double ry = posicionA.GetY() - posicionB.GetY();
 
+            // El que falta a cada vol per arribar final
             double dxA = this.GetFinalPosition().GetX() - posicionA.GetX();
             double dyA = this.GetFinalPosition().GetY() - posicionA.GetY();
-
             double dxB = otro.GetFinalPosition().GetX() - posicionB.GetX();
             double dyB = otro.GetFinalPosition().GetY() - posicionB.GetY();
+            double distanciaA = posicionA.Distancia(this.GetFinalPosition());
+            double distanciaB = posicionB.Distancia(otro.GetFinalPosition());
 
-            double distanciaA = Math.Sqrt(dxA * dxA + dyA * dyA);
-            double distanciaB = Math.Sqrt(dxB * dxB + dyB * dyB);
-
+            
             bool seMueveA = distanciaA > 0 && this.GetVelocidad() > 0;
             bool seMueveB = distanciaB > 0 && otro.GetVelocidad() > 0;
 
+            // Velocidad en x i y  i temps que tarda en arribar cada vuelo
             double vAx = 0;
             double vAy = 0;
             double vBx = 0;
             double vBy = 0;
+            double tiempoLlegadaA = 0;
+            double tiempoLlegadaB = 0;
 
             if (seMueveA)
             {
                 vAx = dxA / distanciaA * this.GetVelocidad() / 60;
                 vAy = dyA / distanciaA * this.GetVelocidad() / 60;
+                tiempoLlegadaA = distanciaA / (this.GetVelocidad() / 60);
             }
-
             if (seMueveB)
             {
                 vBx = dxB / distanciaB * otro.GetVelocidad() / 60;
                 vBy = dyB / distanciaB * otro.GetVelocidad() / 60;
+                tiempoLlegadaB = distanciaB / (otro.GetVelocidad() / 60);
             }
 
-            double tiempoLlegadaA = 0;
-            double tiempoLlegadaB = 0;
+            
+            double distanciaMinima = this.Distancia(otro);
 
-            if (seMueveA)
-                tiempoLlegadaA = distanciaA / (this.GetVelocidad() / 60);
-
-            if (seMueveB)
-                tiempoLlegadaB = distanciaB / (otro.GetVelocidad() / 60);
-
-            double distanciaMinima = Math.Sqrt(rx * rx + ry * ry);
-            tiempoMinimo = 0;
-
+            // Primer tram--> fins que arriba el primer dels dos 
             double duracionPrimerTramo = 0;
-
             if (seMueveA && seMueveB)
-                duracionPrimerTramo = Math.Min(tiempoLlegadaA, tiempoLlegadaB); //.min pilla el minim
+            {
+                if (tiempoLlegadaA < tiempoLlegadaB)
+                    duracionPrimerTramo = tiempoLlegadaA;
+                else
+                    duracionPrimerTramo = tiempoLlegadaB;
+            }
             else if (seMueveA)
                 duracionPrimerTramo = tiempoLlegadaA;
             else if (seMueveB)
                 duracionPrimerTramo = tiempoLlegadaB;
 
-            //si hi ha moviment
             if (duracionPrimerTramo > 0)
             {
-                ComprobarTramo(
-                    rx, ry,
-                    vAx - vBx, vAy - vBy,
-                    duracionPrimerTramo, 0,
-                    ref distanciaMinima, ref tiempoMinimo
-                );
+                double d1 = DistanciaTramo(rx, ry, vAx - vBx, vAy - vBy, duracionPrimerTramo);
+                if (d1 < distanciaMinima)
+                    distanciaMinima = d1;
             }
 
-            // Segundo tramo: uno de los aviones ya ha llegado
+            // Segon tram: uno ja ha arribat i l'altre segueix movent-se
             if (seMueveA && seMueveB)
             {
                 if (tiempoLlegadaA < tiempoLlegadaB)
                 {
-                    // El avion A ha llegado y el B continua moviendose
-                    double rxSegundo = this.GetFinalPosition().GetX()
-                        - (posicionB.GetX() + vBx * tiempoLlegadaA);
+                    // Suposem que A ha arribat, B continua
+                    double rxSegundo = this.GetFinalPosition().GetX() - (posicionB.GetX() + vBx * tiempoLlegadaA);
+                    double rySegundo = this.GetFinalPosition().GetY() - (posicionB.GetY() + vBy * tiempoLlegadaA);
 
-                    double rySegundo = this.GetFinalPosition().GetY()
-                        - (posicionB.GetY() + vBy * tiempoLlegadaA);
-
-                    double duracionSegundo = tiempoLlegadaB - tiempoLlegadaA;
-
-                    ComprobarTramo(
-                        rxSegundo, rySegundo,
-                        -vBx, -vBy,
-                        duracionSegundo, tiempoLlegadaA,
-                        ref distanciaMinima, ref tiempoMinimo
-                    );
+                    double d2 = DistanciaTramo(rxSegundo, rySegundo, -vBx, -vBy, tiempoLlegadaB - tiempoLlegadaA);
+                    if (d2 < distanciaMinima)
+                        distanciaMinima = d2;
                 }
                 else if (tiempoLlegadaB < tiempoLlegadaA)
                 {
-                    // El avion B ha llegado y el A continua moviendose
-                    double rxSegundo = posicionA.GetX() + vAx * tiempoLlegadaB
-                        - otro.GetFinalPosition().GetX();
+                    // Suposem que B ha arribat, A continua
+                    double rxSegundo = posicionA.GetX() + vAx * tiempoLlegadaB - otro.GetFinalPosition().GetX();
+                    double rySegundo = posicionA.GetY() + vAy * tiempoLlegadaB - otro.GetFinalPosition().GetY();
 
-                    double rySegundo = posicionA.GetY() + vAy * tiempoLlegadaB
-                        - otro.GetFinalPosition().GetY();
-
-                    double duracionSegundo = tiempoLlegadaA - tiempoLlegadaB;
-
-                    ComprobarTramo(
-                        rxSegundo, rySegundo,
-                        vAx, vAy,
-                        duracionSegundo, tiempoLlegadaB,
-                        ref distanciaMinima, ref tiempoMinimo
-                    );
+                    double d2 = DistanciaTramo(rxSegundo, rySegundo, vAx, vAy, tiempoLlegadaA - tiempoLlegadaB);
+                    if (d2 < distanciaMinima)
+                        distanciaMinima = d2;
                 }
             }
 

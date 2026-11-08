@@ -45,6 +45,7 @@
             this.labelNuevaVel = new System.Windows.Forms.Label();
             this.textBoxID = new System.Windows.Forms.TextBox();
             this.textBoxNuevaVelocidad = new System.Windows.Forms.TextBox();
+            this.buttonDistMin = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Panel
@@ -209,11 +210,22 @@
             this.textBoxNuevaVelocidad.Size = new System.Drawing.Size(148, 31);
             this.textBoxNuevaVelocidad.TabIndex = 13;
             // 
+            // buttonDistMin
+            // 
+            this.buttonDistMin.Location = new System.Drawing.Point(566, 644);
+            this.buttonDistMin.Name = "buttonDistMin";
+            this.buttonDistMin.Size = new System.Drawing.Size(218, 73);
+            this.buttonDistMin.TabIndex = 14;
+            this.buttonDistMin.Text = "Distancia Mínima";
+            this.buttonDistMin.UseVisualStyleBackColor = true;
+            this.buttonDistMin.Click += new System.EventHandler(this.buttonDistMin_Click);
+            // 
             // SimulacionVuelos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(2148, 1324);
+            this.Controls.Add(this.buttonDistMin);
             this.Controls.Add(this.textBoxNuevaVelocidad);
             this.Controls.Add(this.textBoxID);
             this.Controls.Add(this.labelNuevaVel);
@@ -256,5 +268,6 @@
         private System.Windows.Forms.Label labelNuevaVel;
         private System.Windows.Forms.TextBox textBoxID;
         private System.Windows.Forms.TextBox textBoxNuevaVelocidad;
+        private System.Windows.Forms.Button buttonDistMin;
     }
 }

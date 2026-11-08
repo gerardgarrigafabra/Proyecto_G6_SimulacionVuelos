@@ -42,7 +42,11 @@ namespace Interfaz
         {
             Close();
         }
-        
+        private void buttonAutomatico2_Click(object sender, EventArgs e)
+        {
+            distanciaSeguridad1.Text = "50";
+            tiempoCiclo1.Text = "10";
+        }
         public int GetTiempoCiclo()
         {
             return tiempoCiclo;

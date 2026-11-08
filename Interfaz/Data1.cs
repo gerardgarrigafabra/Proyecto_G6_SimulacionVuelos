@@ -63,10 +63,30 @@ namespace Interfaz
         {
             Close();
         }
+        private void buttonAutomatico_Click(object sender, EventArgs e)
+        {
+
+            id1.Text = "A";
+            initialPositionX1.Text = "20";
+            initialPositionY1.Text = "20";
+            finalPositionX1.Text = "480";
+            finalPositionY1.Text = "480";
+            velocidad1.Text = "10";
+
+
+            id2.Text = "B";
+            initialPositionX2.Text = "480";
+            initialPositionY2.Text = "20";
+            finalPositionX2.Text = "20";
+            finalPositionY2.Text = "480";
+            velocidad2.Text = "10";
+        }
 
         public List<FlightPlan> GetFlightPlans()
         {
             return listaAviones;
         }
+       
+        
     }
 }

@@ -245,5 +245,10 @@ namespace Interfaz
             form.ShowDialog();
         }
 
+        private void buttonDistMin_Click(object sender, EventArgs e)
+        {
+            double dMin = F1.DistanciaMinima(F2);
+            MessageBox.Show("Distancia mínima entre los vuelos: " + dMin.ToString("F2"));
+        }
     }
 }

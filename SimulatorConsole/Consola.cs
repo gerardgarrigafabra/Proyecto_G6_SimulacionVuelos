@@ -17,7 +17,6 @@ namespace SimulatorConsole
             {    
                 
                 Console.WriteLine("Escribe el identificador");
-                   string nombre = Console.ReadLine();
                 string identificador = Console.ReadLine(); ;
 
                 Console.WriteLine("Escribe la velocidad");

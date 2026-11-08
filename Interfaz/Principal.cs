@@ -86,34 +86,10 @@ namespace Interfaz
                         while (conflicto == true && intentos < 40)
                         {
                             velocidadNueva = velocidadNueva * 0.95;
+                            FlightPlan prueba = new FlightPlan(F2.GetId(), F2.GetCurrentPosition().GetX(), F2.GetCurrentPosition().GetY(),
+                                                             F2.GetFinalPosition().GetX(), F2.GetFinalPosition().GetY(), velocidadNueva);
 
-                            // Utilitzo copies per anar modificant la nova evelocitat
-                            FlightPlan plan_a = new FlightPlan(
-                                F1.GetId(),
-                                F1.GetCurrentPosition().GetX(),
-                                F1.GetCurrentPosition().GetY(),
-                                F1.GetFinalPosition().GetX(),
-                                F1.GetFinalPosition().GetY(),
-                                F1.GetVelocidad()
-                            );
-
-                            FlightPlan plan_b = new FlightPlan(
-                                F2.GetId(),
-                                F2.GetCurrentPosition().GetX(),
-                                F2.GetCurrentPosition().GetY(),
-                                F2.GetFinalPosition().GetX(),
-                                F2.GetFinalPosition().GetY(),
-                                velocidadNueva
-                            );
-
-                            //comprovem amb llista
-                            FlightPlanList listaPrueba = new FlightPlanList();
-
-                            listaPrueba.AddFlightPlan(plan_a);
-                            listaPrueba.AddFlightPlan(plan_b);
-
-                            conflicto = listaPrueba.HabraConflicto(tiempoCiclo, distSeguridad);
-
+                            conflicto = F1.DistanciaMinima(prueba) < distSeguridad;
                             intentos = intentos + 1;
                         }
 
