@@ -13,7 +13,7 @@ namespace Interfaz
 {
     public partial class SimulacionVuelos : Form
     {
-        FlightPlan F1, F2;
+     
         int tiempoCiclo;
         List<PictureBox> listaPictureBoxes = new List<PictureBox>(); // Llista de pictureboxes
         FlightPlanList listaAviones = new FlightPlanList();
@@ -190,8 +190,36 @@ namespace Interfaz
         
         private void buttonDistMin_Click(object sender, EventArgs e)
         {
-            double dMin = F1.DistanciaMinima(F2);
-            MessageBox.Show("Distancia mínima entre los vuelos: " + dMin.ToString("F2"));
+            // 2 vols com a mínim
+            if (listaAviones.GetListSize() < 2)
+            {
+                MessageBox.Show("Hacen falta al menos dos vuelos.");
+                return;
+            }
+            double dMin = listaAviones.GetFlightPlan(0).DistanciaMinima(listaAviones.GetFlightPlan(1));
+            string id1 = listaAviones.GetFlightPlan(0).GetId();
+            string id2 = listaAviones.GetFlightPlan(1).GetId();
+
+            int i = 0;
+            while (i < listaAviones.GetListSize())
+            {
+                int j = i + 1;
+                while (j < listaAviones.GetListSize())
+                {
+                    double d = listaAviones.GetFlightPlan(i).DistanciaMinima(listaAviones.GetFlightPlan(j));
+
+                    if (d < dMin)
+                    {
+                        dMin = d;
+                        id1 = listaAviones.GetFlightPlan(i).GetId();
+                        id2 = listaAviones.GetFlightPlan(j).GetId();
+                    }
+                    j = j + 1;
+                }
+                i = i + 1;
+            }
+
+            MessageBox.Show("Distancia mínima: " + dMin.ToString("F2") + " entre los vuelos " + id1 + " y " + id2);
         }
     }
 }
