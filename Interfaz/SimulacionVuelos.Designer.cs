@@ -206,7 +206,7 @@
             this.buttonDistMin.TabIndex = 14;
             this.buttonDistMin.Text = "Distancia Mínima";
             this.buttonDistMin.UseVisualStyleBackColor = true;
-            this.buttonDistMin.Click += new System.EventHandler(this.buttonDistMin_Click);
+
             // 
             // SimulacionVuelos
             // 

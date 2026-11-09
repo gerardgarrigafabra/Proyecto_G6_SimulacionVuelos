@@ -16,7 +16,13 @@ namespace Interfaz
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Principal());
+            Login login = new Login();
+            login.ShowDialog();
+
+            if (login.GetAutenticado() == true)
+            {
+                Application.Run(new Principal());
+            }
         }
     }
 }
