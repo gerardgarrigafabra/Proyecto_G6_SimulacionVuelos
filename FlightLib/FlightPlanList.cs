@@ -212,6 +212,8 @@ namespace FlightLib
 
                 i = 0;
 
+
+
                 while (i < copias.GetListSize())
                 {
                     int j = i + 1;
