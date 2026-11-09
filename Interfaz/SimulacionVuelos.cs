@@ -16,91 +16,62 @@ namespace Interfaz
         FlightPlan F1, F2;
         int tiempoCiclo;
         List<PictureBox> listaPictureBoxes = new List<PictureBox>(); // Llista de pictureboxes
-
+        FlightPlanList listaAviones = new FlightPlanList();
         int distanciaSeguridad;
 
 
-        public SimulacionVuelos(FlightPlan F1, FlightPlan F2, int tiempoCiclo, int distSeguridad)
+        public SimulacionVuelos(FlightPlanList listaAviones, int tiempoCiclo, int distSeguridad)
         {
             InitializeComponent();
-            this.F1 = F1;
-            this.F2 = F2;
+            this.listaAviones = listaAviones;
             this.tiempoCiclo = tiempoCiclo;
             this.distanciaSeguridad = distSeguridad;
+            
         }
 
         private void Panel_Paint(object sender, PaintEventArgs e)
-        {
-            Pen myPen1 = new Pen(Color.Blue);
-            Pen myPen2 = new Pen(Color.Green);
-
-            e.Graphics.DrawLine(myPen1,
-                (float)F1.GetInitialPosition().GetX(), (float)F1.GetInitialPosition().GetY(),
-                (float)F1.GetFinalPosition().GetX(), (float)F1.GetFinalPosition().GetY());
-
-            e.Graphics.DrawLine(myPen2,
-                (float)F2.GetInitialPosition().GetX(), (float)F2.GetInitialPosition().GetY(),
-                (float)F2.GetFinalPosition().GetX(), (float)F2.GetFinalPosition().GetY());
-
-            myPen1.Dispose();
-            myPen2.Dispose();
-
-            using (Graphics g = Panel.CreateGraphics())
-            using (Pen pen = new Pen(Color.Red, 2))
+        {   
+            for ( int i = 0; i < listaAviones.GetListSize(); i++ )
             {
-                int radio = distanciaSeguridad;
-                int diametro = radio * 2;
+                Pen myPen = new Pen(Color.Blue);
+                e.Graphics.DrawLine(myPen,
+                    (float)listaAviones.GetFlightPlan(i).GetInitialPosition().GetX(), (float)listaAviones.GetFlightPlan(i).GetInitialPosition().GetY(),
+                    (float)listaAviones.GetFlightPlan(i).GetFinalPosition().GetX(), (float)listaAviones.GetFlightPlan(i).GetFinalPosition().GetY());
 
-                // Elipse alrededor del primer avión
-                g.DrawEllipse(
-                    pen,
-                    (float)F1.GetCurrentPosition().GetX() - radio,
-                    (float)F1.GetCurrentPosition().GetY() - radio,
-                    diametro,
-                    diametro
-                );
+                myPen.Dispose();
 
-                // Elipse alrededor del segundo avión
-                g.DrawEllipse(
-                    pen,
-                    (float)F2.GetCurrentPosition().GetX() - radio,
-                    (float)F2.GetCurrentPosition().GetY() - radio,
-                    diametro,
-                    diametro
-                );
+                using (Graphics g = Panel.CreateGraphics())
+                using (Pen pen = new Pen(Color.Red, 2))
+                {
+                    int radio = distanciaSeguridad;
+                    int diametro = radio * 2;
+
+                    g.DrawEllipse(
+                        pen,
+                        (float)listaAviones.GetFlightPlan(i).GetCurrentPosition().GetX() - radio,
+                        (float)listaAviones.GetFlightPlan(i).GetCurrentPosition().GetY() - radio,
+                        diametro,
+                        diametro);
+
+                }
             }
         }
 
         private void Mover_Click(object sender, EventArgs e)
         {
-            // Muevo un ciclo y actualizo la posicion en el panel
-            F1.Mover(tiempoCiclo);
-            F2.Mover(tiempoCiclo);
-
+            listaAviones.Mover(tiempoCiclo);
             Panel.Refresh();
 
-            // resto 10 para corregir la posicion del avion y que se vea centrado
-            // Actualizo la posicion de todos los PictureBoxes
-            listaPictureBoxes[0].Location = new Point(
-                Convert.ToInt32(F1.GetCurrentPosition().GetX()) - 10,
-                Convert.ToInt32(F1.GetCurrentPosition().GetY()) - 10
-            );
-
-            listaPictureBoxes[1].Location = new Point(
-                Convert.ToInt32(F2.GetCurrentPosition().GetX()) - 10,
-                Convert.ToInt32(F2.GetCurrentPosition().GetY()) - 10
-            );
-
-            FlightPlanList listaActual = new FlightPlanList();
-
-            listaActual.AddFlightPlan(F1);
-            listaActual.AddFlightPlan(F2);
-
-            if (listaActual.HayConflicto(distanciaSeguridad))
+            for (int i = 0; i<listaAviones.GetListSize(); i++)
             {
-                double distancia = F1.GetCurrentPosition().Distancia(F2.GetCurrentPosition());
+                listaPictureBoxes[i].Location = new Point(
+                    Convert.ToInt32(listaAviones.GetFlightPlan(i).GetCurrentPosition().GetX()) - 10,
+                    Convert.ToInt32(listaAviones.GetFlightPlan(i).GetCurrentPosition().GetY()) - 10);
+            }
 
-                labelAlarma.Text = "¡ALERTA! Distancia entre vuelos: " + distancia.ToString("F2");
+            if (listaAviones.HayConflicto(distanciaSeguridad) == true)
+            {
+                labelAlarma.Text = ("¡ALERTA! Vuelos En Conflicto");
                 labelAlarma.Visible = true;
             }
             else
@@ -109,15 +80,10 @@ namespace Interfaz
             }
         }
 
-        // FASE 10: informa de si los vuelos entraran en conflicto o no
+        // informa de si los vuelos entraran en conflicto o no
         private void buttonConflicto_Click(object sender, EventArgs e)
         {
-            FlightPlanList listaComprobacion = new FlightPlanList();
-
-            listaComprobacion.AddFlightPlan(F1);
-            listaComprobacion.AddFlightPlan(F2);
-
-            bool conflicto = listaComprobacion.HabraConflicto(tiempoCiclo, distanciaSeguridad); //habraconflicto fa lo de copies ja
+            bool conflicto = listaAviones.HabraConflicto(tiempoCiclo, distanciaSeguridad);
 
             if (conflicto == true)
                 MessageBox.Show("Los vuelos entrarán en conflicto.");
@@ -141,9 +107,9 @@ namespace Interfaz
             }
         }
 
-        private void MoverVuelosBtn_Click(object sender, EventArgs e)
+        private void MostarVuelosBtn_Click(object sender, EventArgs e)
         {
-            DataGridForm form = new DataGridForm(F1, F2);
+            DataGridForm form = new DataGridForm(listaAviones);
             form.ShowDialog();
         }
 
@@ -155,27 +121,22 @@ namespace Interfaz
                 string id = textBoxID.Text;
                 if (nuevaVel > 0)
                 {
-                    if (id == F1.GetId() || id == F2.GetId())
+                    bool encontrado = false;
+                    for (int i = 0; i < listaAviones.GetListSize(); i++)
                     {
-                        if (id == F1.GetId())
+                        if (id == listaAviones.GetFlightPlan(i).GetId())
                         {
-                            F1.SetVelocidad(nuevaVel);
-                            F1.Restart();
-                            F2.Restart();
-                            MessageBox.Show("Velocidad del vuelo 1 cambiada a " + nuevaVel);
-                        }
-                        if (id == F2.GetId())
-                        {
-                            F2.SetVelocidad(nuevaVel);
-                            F1.Restart();
-                            F2.Restart();
-                            MessageBox.Show("Velocidad del vuelo 2 cambiada a " + nuevaVel);
+                            listaAviones.GetFlightPlan(i).SetVelocidad(nuevaVel);
+                            listaAviones.RestartList();
+                            MessageBox.Show("Velocidad del vuelo cambiada");
+                            encontrado = true;
                         }
                     }
-                    else
+                    if (encontrado == false)
                     {
-                        MessageBox.Show("No existe ningun vuelo con ese ID");
+                        MessageBox.Show("No existe ningún vuelo con esa ID");
                     }
+
                 }
                 else
                 {
@@ -198,42 +159,24 @@ namespace Interfaz
             Panel.MaximumSize = new Size(500, 500);
 
             // primer PictureBox
-            PictureBox avion1 = new PictureBox();
 
-            avion1.Size = new Size(20, 20);
-            avion1.SizeMode = PictureBoxSizeMode.StretchImage;
-            avion1.Image = new Bitmap("Avion.gif");
+            for (int i = 0; i < listaAviones.GetListSize(); i++)
+            {
+                PictureBox avion = new PictureBox();
 
-            avion1.Location = new Point(
-                Convert.ToInt32(F1.GetCurrentPosition().GetX()) - 10,
-                Convert.ToInt32(F1.GetCurrentPosition().GetY()) - 10
-            );
+                avion.Size = new Size(20, 20);
+                avion.SizeMode = PictureBoxSizeMode.StretchImage;
+                avion.Image = new Bitmap("Avion.gif");
 
-            avion1.Tag = F1;
-            avion1.Click += new System.EventHandler(this.evento);
+                avion.Location = new Point(
+                    Convert.ToInt32(listaAviones.GetFlightPlan(i).GetCurrentPosition().GetX()) - 10,
+                    Convert.ToInt32(listaAviones.GetFlightPlan(i).GetCurrentPosition().GetY()) - 10);
 
-            listaPictureBoxes.Add(avion1);
-            Panel.Controls.Add(avion1);
-
-
-            // segon PictureBox
-            PictureBox avion2 = new PictureBox();
-
-            avion2.Size = new Size(20, 20);
-            avion2.SizeMode = PictureBoxSizeMode.StretchImage;
-            avion2.Image = new Bitmap("Avion.gif");
-
-            avion2.Location = new Point(
-                Convert.ToInt32(F2.GetCurrentPosition().GetX()) - 10,
-                Convert.ToInt32(F2.GetCurrentPosition().GetY()) - 10
-            );
-
-            avion2.Tag = F2;
-            avion2.Click += new System.EventHandler(this.evento);
-
-            listaPictureBoxes.Add(avion2);
-            Panel.Controls.Add(avion2);
-
+                avion.Tag = listaAviones.GetFlightPlan(i); 
+                avion.Click += new System.EventHandler(this.evento);
+                listaPictureBoxes.Add(avion);
+                Panel.Controls.Add(avion);
+            }
         }
 
         private void evento(object sender, EventArgs e)
@@ -244,7 +187,7 @@ namespace Interfaz
             InfoAvion form = new InfoAvion(avionEscogido);
             form.ShowDialog();
         }
-
+        
         private void buttonDistMin_Click(object sender, EventArgs e)
         {
             double dMin = F1.DistanciaMinima(F2);

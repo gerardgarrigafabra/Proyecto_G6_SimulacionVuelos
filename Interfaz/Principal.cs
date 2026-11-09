@@ -13,7 +13,7 @@ namespace Interfaz
 {
     public partial class Principal : Form
     {
-        List<FlightPlan> listaAviones = new List<FlightPlan>();
+        FlightPlanList listaAviones = new FlightPlanList();
         FlightPlan F1;
         FlightPlan F2;
 
@@ -32,12 +32,14 @@ namespace Interfaz
 
             form.ShowDialog();
 
+            
+
             listaAviones = form.GetFlightPlans();
 
-            if (listaAviones.Count == 2)
+            if (listaAviones.GetListSize() >= 2)
             {
-                F1 = listaAviones[0];
-                F2 = listaAviones[1];
+                F1 = listaAviones.GetFlightPlan(0);
+                F2 = listaAviones.GetFlightPlan(1);
             }
             else
             {
@@ -63,13 +65,7 @@ namespace Interfaz
         {
             if (F1 != null && F2 != null && tiempoCiclo != 0)
             {
-                // Respecte la fase 11 les copies i la simulació ja es tenen en compte a flightplanlist.cs i aqui nomes creo una llista de comprovació de conflicte
-                FlightPlanList listaComprobacion = new FlightPlanList();
-
-                listaComprobacion.AddFlightPlan(F1);
-                listaComprobacion.AddFlightPlan(F2);
-
-                bool conflicto = listaComprobacion.HabraConflicto(tiempoCiclo, distSeguridad);
+                bool conflicto = listaAviones.HabraConflicto(tiempoCiclo, distSeguridad);
 
                 if (conflicto == true)
                 {
@@ -78,28 +74,11 @@ namespace Interfaz
 
                     if (respuesta == DialogResult.Yes)
                     {
-                        // Resuelvo el conflicto bajando la velocidad del vuelo 2 un 5% cada vez
-                        // y repitiendo la comprobacion hasta que ya no haya conflicto
-                        double velocidadNueva = F2.GetVelocidad();
-                        int intentos = 0;
-
-                        while (conflicto == true && intentos < 40)
-                        {
-                            velocidadNueva = velocidadNueva * 0.95;
-                            FlightPlan prueba = new FlightPlan(F2.GetId(), F2.GetCurrentPosition().GetX(), F2.GetCurrentPosition().GetY(),
-                                                             F2.GetFinalPosition().GetX(), F2.GetFinalPosition().GetY(), velocidadNueva);
-
-                            conflicto = F1.DistanciaMinima(prueba) < distSeguridad;
-                            intentos = intentos + 1;
-                        }
-
-                        conflicto = listaComprobacion.ResolverConflictosLista(distSeguridad);
+                        conflicto = listaAviones.ResolverConflictosLista(distSeguridad);
 
                         if (conflicto == false)
                         {
-                            // Cambio la velocidad del vuelo real y se simulará con la nueva velocidad
-                            F2.SetVelocidad(velocidadNueva);
-                            MessageBox.Show("Conflicto resuelto. Nueva velocidad del vuelo " + F2.GetId() + ": " + velocidadNueva.ToString("F2"));
+                            MessageBox.Show("Conflicto resuelto.");
                         }
                         else
                         {
@@ -108,7 +87,7 @@ namespace Interfaz
                     }
                 }
 
-                SimulacionVuelos form = new SimulacionVuelos(F1, F2, tiempoCiclo, distSeguridad);
+                SimulacionVuelos form = new SimulacionVuelos(listaAviones, tiempoCiclo, distSeguridad);
                 form.ShowDialog();
             }
             else

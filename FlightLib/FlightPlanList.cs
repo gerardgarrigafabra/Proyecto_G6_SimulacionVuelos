@@ -27,6 +27,18 @@ namespace FlightLib
                 return vector[i];
             }
         }
+        public int GetListSize()
+        {
+            return vector.Count;
+        }
+
+        public void RestartList()
+        {
+            for (int i = 0; i < vector.Count; i++)
+            {
+                vector[i].Restart();
+            }
+        }
 
         public void Mover(double tiempo)
         {
@@ -167,7 +179,8 @@ namespace FlightLib
 
         public bool ResolverConflictosLista(double distanciaSeguridad)
         {
-            List<FlightPlan> copias = new List<FlightPlan>();
+            // Resolem els conflictes en una llista nova i mirem es poden resoldre avans de aplicar els canvis a la nostre.
+            FlightPlanList copias = new FlightPlanList();
 
             int i = 0;
 
@@ -184,7 +197,7 @@ namespace FlightLib
                     original.GetVelocidad()
                 );
 
-                copias.Add(copia);
+                copias.AddFlightPlan(copia);
                 i++;
             }
 
@@ -199,19 +212,19 @@ namespace FlightLib
 
                 i = 0;
 
-                while (i < copias.Count)
+                while (i < copias.GetListSize())
                 {
                     int j = i + 1;
 
-                    while (j < copias.Count)
+                    while (j < copias.GetListSize())
                     {
-                        if (copias[i].DistanciaMinima(copias[j]) < distanciaSeguridad)
+                        if (copias.GetFlightPlan(i).DistanciaMinima(copias.GetFlightPlan(j)) < distanciaSeguridad)
                         {
                             hayConflicto = true;
 
-                            double nuevaVelocidad = copias[j].GetVelocidad() * 0.95;
+                            double nuevaVelocidad = copias.GetFlightPlan(j).GetVelocidad() * 0.95;
 
-                            copias[j].SetVelocidad(nuevaVelocidad);
+                            copias.GetFlightPlan(j).SetVelocidad(nuevaVelocidad);
                         }
 
                         j++;
@@ -223,13 +236,19 @@ namespace FlightLib
                 ciclos++;
             }
 
-            if (hayConflicto == true)
+            if (hayConflicto == false)
             {
-                return true;
+                i = 0;
+                while(i < vector.Count)
+                {
+                    vector[i].SetVelocidad(copias.GetFlightPlan(i).GetVelocidad());
+                    i++;
+                }
+                return false;
             }
             else
             {
-                return false;
+                return true;
             }
         }
     }

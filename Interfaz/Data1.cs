@@ -17,7 +17,7 @@ namespace Interfaz
         {
             InitializeComponent();
         }
-        List<FlightPlan> listaAviones = new List<FlightPlan>();
+        FlightPlanList listaAviones = new FlightPlanList();
         private void buttonInsertar_Click(object sender, EventArgs e)
         {
             try
@@ -46,10 +46,8 @@ namespace Interfaz
                     return;
                 }
 
-                listaAviones.Clear();  // Si volem posar més de 2 avions a la llista, aquesta línea s'ha de eliminar.
-
-                listaAviones.Add(F1);
-                listaAviones.Add(F2);
+                listaAviones.AddFlightPlan(F1);
+                listaAviones.AddFlightPlan(F2);
 
                 MessageBox.Show("Datos cargados correctamente");
             }
@@ -82,7 +80,7 @@ namespace Interfaz
             velocidad2.Text = "10";
         }
 
-        public List<FlightPlan> GetFlightPlans()
+        public FlightPlanList GetFlightPlans()
         {
             return listaAviones;
         }

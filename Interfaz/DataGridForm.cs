@@ -14,12 +14,15 @@ namespace Interfaz
     public partial class DataGridForm : Form
     {
         FlightPlan F1, F2;
+        FlightPlanList listaAviones;
 
-        public DataGridForm(FlightPlan F1, FlightPlan F2)
+        public DataGridForm(FlightPlanList listaAviones)
         {
             InitializeComponent();
-            this.F1 = F1;
-            this.F2 = F2;
+            this.listaAviones = listaAviones;
+            F1 = listaAviones.GetFlightPlan(0);
+            F2 = listaAviones.GetFlightPlan(1);
+            
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -37,9 +40,10 @@ namespace Interfaz
             dataGridView1.Columns.Add("Col3", "Posicion");
             dataGridView1.Columns.Add("Col4", "Destino");
 
-            dataGridView1.Rows.Add(F1.GetId(), F1.GetVelocidad(), F1.GetCurrentPosition().GetX().ToString("F2") +", "+ F1.GetCurrentPosition().GetY().ToString("F2"), F1.GetFinalPosition().GetX().ToString("F2") + ", "+ F1.GetFinalPosition().GetY().ToString("F2"));
-            dataGridView1.Rows.Add(F2.GetId(), F2.GetVelocidad(), F2.GetCurrentPosition().GetX().ToString("F2") + ", " + F2.GetCurrentPosition().GetY().ToString("F2"), F2.GetFinalPosition().GetX().ToString("F2") + ", " + F2.GetFinalPosition().GetY().ToString("F2"));
-
+            for (int i = 0; i < listaAviones.GetListSize(); i++)
+            {
+                dataGridView1.Rows.Add(listaAviones.GetFlightPlan(i).GetId(), listaAviones.GetFlightPlan(i).GetVelocidad(), listaAviones.GetFlightPlan(i).GetCurrentPosition().GetX().ToString("F2") + ", " + listaAviones.GetFlightPlan(i).GetCurrentPosition().GetY().ToString("F2"), listaAviones.GetFlightPlan(i).GetFinalPosition().GetX().ToString("F2") + ", " + listaAviones.GetFlightPlan(i).GetFinalPosition().GetY().ToString("F2"));
+            }
         }
 
     }
