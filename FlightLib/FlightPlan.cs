@@ -120,8 +120,7 @@
             
                     return resultado;
                 }
-                // distancia min x segment
-                private double TiempoMinimo(double rx, double ry, double vx, double vy, double duracion)
+                public double TiempoMinimo(double rx, double ry, double vx, double vy, double duracion)
                 {
                     double velocidadCuadrado = vx * vx + vy * vy;
                     double tiempo = 0;
@@ -137,6 +136,7 @@
                         tiempo = duracion;
                     return tiempo;
                 }
+                // distancia min x segment
 
                 public double DistanciaTramo(double rx, double ry, double vx, double vy, double duracion)
                 {

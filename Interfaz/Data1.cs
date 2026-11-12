@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -84,7 +85,24 @@ namespace Interfaz
         {
             return listaAviones;
         }
-       
-        
+
+        private void CargarFichero_Click(object sender, EventArgs e)
+        { // Se carga datos desde un fichero. En la carpeta se llama FlightPlans.txt -> carga 3 vuelos
+            try
+            {
+                string fichero = nombreFichero.Text;
+                listaAviones = new FlightPlanList();
+                listaAviones.leerFichero(fichero);
+                MessageBox.Show("Datos cargados correctamente");
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("ERROR: formato incorrecto");
+            }
+            catch (FileNotFoundException)
+            {
+                MessageBox.Show("ERROR: fichero no encontrado");
+            } 
+        }
     }
 }

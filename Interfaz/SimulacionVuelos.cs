@@ -16,6 +16,8 @@ namespace Interfaz
      
         int tiempoCiclo;
         List<PictureBox> listaPictureBoxes = new List<PictureBox>(); // Llista de pictureboxes
+
+        Stack<List<Position>> historialposiciones = new Stack<List<Position>>(); // Guarda las posiciones de los aviones durante el recorrido
         FlightPlanList listaAviones = new FlightPlanList();
         int distanciaSeguridad;
 
@@ -59,6 +61,7 @@ namespace Interfaz
 
         private void Mover_Click(object sender, EventArgs e)
         {
+            historialposiciones.Push(listaAviones.GuardarPosiciones());
             listaAviones.Mover(tiempoCiclo);
             Panel.Refresh();
 
@@ -128,6 +131,7 @@ namespace Interfaz
                         {
                             listaAviones.GetFlightPlan(i).SetVelocidad(nuevaVel);
                             listaAviones.RestartList();
+                            historialposiciones.Clear();
                             MessageBox.Show("Velocidad del vuelo cambiada");
                             encontrado = true;
                         }
@@ -187,7 +191,36 @@ namespace Interfaz
             InfoAvion form = new InfoAvion(avionEscogido);
             form.ShowDialog();
         }
-        
-        
+
+        private void deshacerBtn_Click(object sender, EventArgs e)
+        {
+            timer1.Stop();
+            AutoMov.Text= "Movimiento Automatico";
+            if (historialposiciones.Count > 0)
+            {
+                listaAviones.RestaurarPosiciones(historialposiciones.Pop());
+                Panel.Refresh();
+
+                for (int i = 0; i < listaAviones.GetListSize(); i++)
+                {
+                    listaPictureBoxes[i].Location = new Point(
+                        Convert.ToInt32(listaAviones.GetFlightPlan(i).GetCurrentPosition().GetX()) - 10,
+                        Convert.ToInt32(listaAviones.GetFlightPlan(i).GetCurrentPosition().GetY()) - 10);
+                }
+                if (listaAviones.HayConflicto(distanciaSeguridad) == true)
+                {
+                    labelAlarma.Text = ("¡ALERTA! Vuelos En Conflicto");
+                    labelAlarma.Visible = true;
+                }
+                else
+                {
+                    labelAlarma.Visible = false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("No hay movimientos para deshacer");
+            }
+        }
     }
 }
