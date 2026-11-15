@@ -45,17 +45,18 @@
             this.labelNuevaVel = new System.Windows.Forms.Label();
             this.textBoxID = new System.Windows.Forms.TextBox();
             this.textBoxNuevaVelocidad = new System.Windows.Forms.TextBox();
-            this.buttonDistMin = new System.Windows.Forms.Button();
             this.deshacerBtn = new System.Windows.Forms.Button();
+            this.buttonGuardar = new System.Windows.Forms.Button();
+            this.buttonCerrar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Panel
             // 
             this.Panel.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.Panel.Location = new System.Drawing.Point(633, 50);
-            this.Panel.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.Panel.Location = new System.Drawing.Point(844, 62);
+            this.Panel.Margin = new System.Windows.Forms.Padding(4, 1, 4, 1);
             this.Panel.Name = "Panel";
-            this.Panel.Size = new System.Drawing.Size(736, 772);
+            this.Panel.Size = new System.Drawing.Size(981, 965);
             this.Panel.TabIndex = 0;
             this.Panel.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel_Paint);
             // 
@@ -63,9 +64,10 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.label1.Location = new System.Drawing.Point(627, 10);
+            this.label1.Location = new System.Drawing.Point(836, 12);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 37);
+            this.label1.Size = new System.Drawing.Size(46, 51);
             this.label1.TabIndex = 0;
             this.label1.Text = "0";
             // 
@@ -73,9 +75,10 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.label2.Location = new System.Drawing.Point(593, 48);
+            this.label2.Location = new System.Drawing.Point(791, 60);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 37);
+            this.label2.Size = new System.Drawing.Size(46, 51);
             this.label2.TabIndex = 1;
             this.label2.Text = "0";
             // 
@@ -83,9 +86,10 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.label3.Location = new System.Drawing.Point(559, 784);
+            this.label3.Location = new System.Drawing.Point(745, 980);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(71, 37);
+            this.label3.Size = new System.Drawing.Size(94, 51);
             this.label3.TabIndex = 2;
             this.label3.Text = "499";
             // 
@@ -93,18 +97,19 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.label4.Location = new System.Drawing.Point(1304, 9);
+            this.label4.Location = new System.Drawing.Point(1739, 11);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(71, 37);
+            this.label4.Size = new System.Drawing.Size(94, 51);
             this.label4.TabIndex = 3;
             this.label4.Text = "499";
             // 
             // Mover
             // 
-            this.Mover.Location = new System.Drawing.Point(89, 104);
-            this.Mover.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.Mover.Location = new System.Drawing.Point(119, 130);
+            this.Mover.Margin = new System.Windows.Forms.Padding(4, 1, 4, 1);
             this.Mover.Name = "Mover";
-            this.Mover.Size = new System.Drawing.Size(192, 105);
+            this.Mover.Size = new System.Drawing.Size(256, 131);
             this.Mover.TabIndex = 4;
             this.Mover.Text = "Mover Vuelos";
             this.Mover.UseVisualStyleBackColor = true;
@@ -112,10 +117,10 @@
             // 
             // AutoMov
             // 
-            this.AutoMov.Location = new System.Drawing.Point(204, 235);
-            this.AutoMov.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.AutoMov.Location = new System.Drawing.Point(272, 294);
+            this.AutoMov.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.AutoMov.Name = "AutoMov";
-            this.AutoMov.Size = new System.Drawing.Size(192, 109);
+            this.AutoMov.Size = new System.Drawing.Size(256, 136);
             this.AutoMov.TabIndex = 5;
             this.AutoMov.Text = "Movimiento Automatico";
             this.AutoMov.UseVisualStyleBackColor = true;
@@ -127,10 +132,10 @@
             // 
             // MostrarVuelosBtn
             // 
-            this.MostrarVuelosBtn.Location = new System.Drawing.Point(204, 375);
-            this.MostrarVuelosBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.MostrarVuelosBtn.Location = new System.Drawing.Point(272, 469);
+            this.MostrarVuelosBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MostrarVuelosBtn.Name = "MostrarVuelosBtn";
-            this.MostrarVuelosBtn.Size = new System.Drawing.Size(192, 96);
+            this.MostrarVuelosBtn.Size = new System.Drawing.Size(256, 120);
             this.MostrarVuelosBtn.TabIndex = 6;
             this.MostrarVuelosBtn.Text = "Mostar Vuelos";
             this.MostrarVuelosBtn.UseVisualStyleBackColor = true;
@@ -138,10 +143,10 @@
             // 
             // buttonConflicto
             // 
-            this.buttonConflicto.Location = new System.Drawing.Point(204, 496);
-            this.buttonConflicto.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.buttonConflicto.Location = new System.Drawing.Point(272, 620);
+            this.buttonConflicto.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.buttonConflicto.Name = "buttonConflicto";
-            this.buttonConflicto.Size = new System.Drawing.Size(192, 96);
+            this.buttonConflicto.Size = new System.Drawing.Size(256, 120);
             this.buttonConflicto.TabIndex = 7;
             this.buttonConflicto.Text = "¿Habrá conflicto?";
             this.buttonConflicto.UseVisualStyleBackColor = true;
@@ -152,19 +157,20 @@
             this.labelAlarma.AutoSize = true;
             this.labelAlarma.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.labelAlarma.ForeColor = System.Drawing.Color.Red;
-            this.labelAlarma.Location = new System.Drawing.Point(34, 775);
+            this.labelAlarma.Location = new System.Drawing.Point(45, 969);
+            this.labelAlarma.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelAlarma.Name = "labelAlarma";
-            this.labelAlarma.Size = new System.Drawing.Size(111, 29);
+            this.labelAlarma.Size = new System.Drawing.Size(148, 37);
             this.labelAlarma.TabIndex = 8;
             this.labelAlarma.Text = "ALERTA";
             this.labelAlarma.Visible = false;
             // 
             // CambiarVelocidadBtn
             // 
-            this.CambiarVelocidadBtn.Location = new System.Drawing.Point(39, 625);
-            this.CambiarVelocidadBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.CambiarVelocidadBtn.Location = new System.Drawing.Point(52, 781);
+            this.CambiarVelocidadBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.CambiarVelocidadBtn.Name = "CambiarVelocidadBtn";
-            this.CambiarVelocidadBtn.Size = new System.Drawing.Size(192, 98);
+            this.CambiarVelocidadBtn.Size = new System.Drawing.Size(256, 122);
             this.CambiarVelocidadBtn.TabIndex = 9;
             this.CambiarVelocidadBtn.Text = "Cambiar Velocidad";
             this.CambiarVelocidadBtn.UseVisualStyleBackColor = true;
@@ -173,65 +179,80 @@
             // LabelIdCv
             // 
             this.LabelIdCv.AutoSize = true;
-            this.LabelIdCv.Location = new System.Drawing.Point(353, 650);
+            this.LabelIdCv.Location = new System.Drawing.Point(471, 812);
+            this.LabelIdCv.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LabelIdCv.Name = "LabelIdCv";
-            this.LabelIdCv.Size = new System.Drawing.Size(26, 20);
+            this.LabelIdCv.Size = new System.Drawing.Size(32, 25);
             this.LabelIdCv.TabIndex = 10;
             this.LabelIdCv.Text = "ID";
             // 
             // labelNuevaVel
             // 
             this.labelNuevaVel.AutoSize = true;
-            this.labelNuevaVel.Location = new System.Drawing.Point(250, 692);
+            this.labelNuevaVel.Location = new System.Drawing.Point(333, 865);
+            this.labelNuevaVel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelNuevaVel.Name = "labelNuevaVel";
-            this.labelNuevaVel.Size = new System.Drawing.Size(128, 20);
+            this.labelNuevaVel.Size = new System.Drawing.Size(175, 25);
             this.labelNuevaVel.TabIndex = 11;
             this.labelNuevaVel.Text = "Nueva Velocidad";
             // 
             // textBoxID
             // 
-            this.textBoxID.Location = new System.Drawing.Point(404, 646);
-            this.textBoxID.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.textBoxID.Location = new System.Drawing.Point(539, 808);
+            this.textBoxID.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBoxID.Name = "textBoxID";
-            this.textBoxID.Size = new System.Drawing.Size(112, 26);
+            this.textBoxID.Size = new System.Drawing.Size(148, 31);
             this.textBoxID.TabIndex = 12;
             // 
             // textBoxNuevaVelocidad
             // 
-            this.textBoxNuevaVelocidad.Location = new System.Drawing.Point(404, 685);
-            this.textBoxNuevaVelocidad.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.textBoxNuevaVelocidad.Location = new System.Drawing.Point(539, 856);
+            this.textBoxNuevaVelocidad.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBoxNuevaVelocidad.Name = "textBoxNuevaVelocidad";
-            this.textBoxNuevaVelocidad.Size = new System.Drawing.Size(112, 26);
+            this.textBoxNuevaVelocidad.Size = new System.Drawing.Size(148, 31);
             this.textBoxNuevaVelocidad.TabIndex = 13;
-            // 
-            // buttonDistMin
-            // 
-            this.buttonDistMin.Location = new System.Drawing.Point(424, 515);
-            this.buttonDistMin.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonDistMin.Name = "buttonDistMin";
-            this.buttonDistMin.Size = new System.Drawing.Size(163, 59);
-            this.buttonDistMin.TabIndex = 14;
-            this.buttonDistMin.Text = "Distancia Mínima";
-            this.buttonDistMin.UseVisualStyleBackColor = true;
             // 
             // deshacerBtn
             // 
-            this.deshacerBtn.Location = new System.Drawing.Point(324, 104);
-            this.deshacerBtn.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.deshacerBtn.Location = new System.Drawing.Point(432, 130);
+            this.deshacerBtn.Margin = new System.Windows.Forms.Padding(4, 1, 4, 1);
             this.deshacerBtn.Name = "deshacerBtn";
-            this.deshacerBtn.Size = new System.Drawing.Size(192, 105);
+            this.deshacerBtn.Size = new System.Drawing.Size(256, 131);
             this.deshacerBtn.TabIndex = 15;
             this.deshacerBtn.Text = "Mover Vuelos Para Atras";
             this.deshacerBtn.UseVisualStyleBackColor = true;
             this.deshacerBtn.Click += new System.EventHandler(this.deshacerBtn_Click);
             // 
+            // buttonGuardar
+            // 
+            this.buttonGuardar.Location = new System.Drawing.Point(595, 524);
+            this.buttonGuardar.Margin = new System.Windows.Forms.Padding(4, 1, 4, 1);
+            this.buttonGuardar.Name = "buttonGuardar";
+            this.buttonGuardar.Size = new System.Drawing.Size(184, 65);
+            this.buttonGuardar.TabIndex = 16;
+            this.buttonGuardar.Text = "Guardar Vuelos";
+            this.buttonGuardar.UseVisualStyleBackColor = true;
+            this.buttonGuardar.Click += new System.EventHandler(this.buttonGuardar_Click);
+            // 
+            // buttonCerrar
+            // 
+            this.buttonCerrar.Location = new System.Drawing.Point(24, 539);
+            this.buttonCerrar.Margin = new System.Windows.Forms.Padding(4, 1, 4, 1);
+            this.buttonCerrar.Name = "buttonCerrar";
+            this.buttonCerrar.Size = new System.Drawing.Size(184, 65);
+            this.buttonCerrar.TabIndex = 17;
+            this.buttonCerrar.Text = "Cerrar";
+            this.buttonCerrar.UseVisualStyleBackColor = true;
+            this.buttonCerrar.Click += new System.EventHandler(this.buttonCerrar_Click);
+            // 
             // SimulacionVuelos
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1443, 844);
+            this.ClientSize = new System.Drawing.Size(1924, 1055);
+            this.Controls.Add(this.buttonCerrar);
+            this.Controls.Add(this.buttonGuardar);
             this.Controls.Add(this.deshacerBtn);
-            this.Controls.Add(this.buttonDistMin);
             this.Controls.Add(this.textBoxNuevaVelocidad);
             this.Controls.Add(this.textBoxID);
             this.Controls.Add(this.labelNuevaVel);
@@ -247,7 +268,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Panel);
-            this.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.Margin = new System.Windows.Forms.Padding(4, 1, 4, 1);
             this.Name = "SimulacionVuelos";
             this.Text = "SimulacionVuelos";
             this.Load += new System.EventHandler(this.SimulacionVuelos_Load);
@@ -274,7 +295,8 @@
         private System.Windows.Forms.Label labelNuevaVel;
         private System.Windows.Forms.TextBox textBoxID;
         private System.Windows.Forms.TextBox textBoxNuevaVelocidad;
-        private System.Windows.Forms.Button buttonDistMin;
         private System.Windows.Forms.Button deshacerBtn;
+        private System.Windows.Forms.Button buttonGuardar;
+        private System.Windows.Forms.Button buttonCerrar;
     }
 }

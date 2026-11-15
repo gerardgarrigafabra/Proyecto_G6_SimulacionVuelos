@@ -15,9 +15,10 @@
                 Position currentPosition; // posicion actual
                 Position finalPosition; // posicion final
                 double velocidad;
+                string company = "-";
 
-                // Constructures
-                public FlightPlan(string id, double cpx, double cpy, double fpx, double fpy, double velocidad)
+        // Constructures
+        public FlightPlan(string id, double cpx, double cpy, double fpx, double fpy, double velocidad)
                 {
                     this.id = id;
                     this.currentPosition = new Position(cpx, cpy);
@@ -264,6 +265,15 @@
                     if(this.HasArrived())
                         Console.WriteLine("Ha llegado al destino");
                     Console.WriteLine("******************************");
+                }
+                public void SetCompany(string company)
+                {
+                    this.company = company;
+                }
+
+                public string GetCompany()
+                {
+                return this.company;
                 }
 
             }

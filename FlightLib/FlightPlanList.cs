@@ -363,17 +363,25 @@ namespace FlightLib
 
         public void leerFichero(string fichero)
         {
-
             StreamReader R = new StreamReader(fichero);
 
             string linea = R.ReadLine();
             while (linea != null)
             {
-                string[] trozos = linea.Split(' ');
-                FlightPlan F = new FlightPlan(trozos[0], Convert.ToDouble(trozos[1]),
-                    Convert.ToDouble(trozos[2]), Convert.ToDouble(trozos[3]), Convert.ToDouble(trozos[4]), 
-                    Convert.ToDouble(trozos[5]));
-                vector.Add(F);
+                 string[] trozos = linea.Split(' ');
+
+                // Carreguem les línies amb  7 camps: id companyia x y destinoX destinoY velocitat
+                if (linea != "")
+                {
+                    if (trozos.Length == 7)
+                    {
+                        FlightPlan F = new FlightPlan(trozos[0], Convert.ToDouble(trozos[2]),
+                            Convert.ToDouble(trozos[3]), Convert.ToDouble(trozos[4]), Convert.ToDouble(trozos[5]),
+                            Convert.ToDouble(trozos[6]));
+                        F.SetCompany(trozos[1]);
+                        vector.Add(F);
+                    }
+                }
 
                 linea = R.ReadLine();
             }
@@ -398,6 +406,26 @@ namespace FlightLib
             {
                 vector[i].SetCurrentPosition(posiciones[i]);
             }
+        }
+        public void guardarFichero(string fichero)
+        {
+            StreamWriter W = new StreamWriter(fichero);
+
+            int i = 0;
+            while (i < vector.Count)
+            {
+                FlightPlan F = vector[i];
+
+                // id companyia posiciónActualX posiciónActualY destinoX destinoY velocitat
+                W.WriteLine(F.GetId() + " " + F.GetCompany() + " " +
+                    F.GetCurrentPosition().GetX() + " " + F.GetCurrentPosition().GetY() + " " +
+                    F.GetFinalPosition().GetX() + " " + F.GetFinalPosition().GetY() + " " +
+                    F.GetVelocidad());
+
+                i = i + 1;
+            }
+
+            W.Close();
         }
     }
 }

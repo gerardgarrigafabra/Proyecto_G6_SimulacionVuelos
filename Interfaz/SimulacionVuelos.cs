@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -222,5 +223,41 @@ namespace Interfaz
                 MessageBox.Show("No hay movimientos para deshacer");
             }
         }
+
+        private void buttonGuardar_Click(object sender, EventArgs e)
+        {
+     
+           
+            timer1.Stop();
+            AutoMov.Text = "Movimiento Automatico";
+
+            SaveFileDialog dialogo = new SaveFileDialog();
+            dialogo.Filter = "Ficheros de texto|*.txt";
+            dialogo.DefaultExt = "txt";
+            dialogo.Title = "Guardar los planes de vuelo";
+            dialogo.ShowDialog();
+
+            if (dialogo.FileName != "")
+            {
+                try
+                {
+                    listaAviones.guardarFichero(dialogo.FileName);
+                    MessageBox.Show("Planes de vuelo guardados");
+                }
+                catch (IOException)
+                {
+                    MessageBox.Show("ERROR: no se ha podido guardar el fichero");
+                }
+            }
+        }
+
+        private void buttonCerrar_Click(object sender, EventArgs e)
+
+        { 
+            timer1.Stop();
+            Close();
+        }
+    
     }
+    
 }

@@ -46,6 +46,16 @@ namespace Interfaz
                     MessageBox.Show("ERROR: La velocidad no puede ser negativa");
                     return;
                 }
+                
+                if (id1.Text == "" || id2.Text == "" || company1.Text == "" || company2.Text == "" ||
+                    id1.Text.Contains(" ") || id2.Text.Contains(" ") || company1.Text.Contains(" ") || company2.Text.Contains(" "))
+                {
+                    MessageBox.Show("ERROR: el ID y la compañía no pueden estar vacíos ni tener espacios");
+                    return;
+                }
+
+                F1.SetCompany(company1.Text);
+                F2.SetCompany(company2.Text);
 
                 listaAviones.AddFlightPlan(F1);
                 listaAviones.AddFlightPlan(F2);
@@ -71,6 +81,7 @@ namespace Interfaz
             finalPositionX1.Text = "480";
             finalPositionY1.Text = "480";
             velocidad1.Text = "10";
+            company1.Text = "Iberia";
 
 
             id2.Text = "B";
@@ -79,6 +90,7 @@ namespace Interfaz
             finalPositionX2.Text = "20";
             finalPositionY2.Text = "480";
             velocidad2.Text = "10";
+            company2.Text = "Vueling";
         }
 
         public FlightPlanList GetFlightPlans()
@@ -87,22 +99,31 @@ namespace Interfaz
         }
 
         private void CargarFichero_Click(object sender, EventArgs e)
-        { // Se carga datos desde un fichero. En la carpeta se llama FlightPlans.txt -> carga 3 vuelos
-            try
+        {
+            OpenFileDialog dialogo = new OpenFileDialog();
+            dialogo.Filter = "Ficheros de texto|*.txt";
+            dialogo.Title = "Selecciona el fichero con los planes de vuelo";
+            dialogo.ShowDialog();
+
+            // Si el usuario cancela, FileName se queda vacío
+            if (dialogo.FileName != "")
             {
-                string fichero = nombreFichero.Text;
-                listaAviones = new FlightPlanList();
-                listaAviones.leerFichero(fichero);
-                MessageBox.Show("Datos cargados correctamente");
+                try
+                {
+                    nombreFichero.Text = dialogo.FileName; // muestro cuál se ha elegido
+                    listaAviones = new FlightPlanList();
+                    listaAviones.leerFichero(dialogo.FileName);
+                    MessageBox.Show("Datos cargados correctamente: " + listaAviones.GetListSize() + " vuelos");
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("ERROR: formato incorrecto");
+                }
+                catch (FileNotFoundException)
+                {
+                    MessageBox.Show("ERROR: fichero no encontrado");
+                }
             }
-            catch (FormatException)
-            {
-                MessageBox.Show("ERROR: formato incorrecto");
-            }
-            catch (FileNotFoundException)
-            {
-                MessageBox.Show("ERROR: fichero no encontrado");
-            } 
         }
     }
 }

@@ -41,7 +41,7 @@ namespace FlightLib
             return false;
         }
 
-        // miramos si el nombre y la contraseña coinciden con los de un usuario
+        // mirem nom i contra
         public bool Autenticar(string nombre, string contrasena)
         {
             int i = 0;

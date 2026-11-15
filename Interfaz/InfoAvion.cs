@@ -26,6 +26,7 @@ namespace Interfaz
             txtVelocidad.Text = avionEscogido.GetVelocidad().ToString();
             txtPosicion.Text = avionEscogido.GetCurrentPosition().GetX().ToString() + ", " + avionEscogido.GetCurrentPosition().GetY().ToString();
             txtDestino.Text= avionEscogido.GetFinalPosition().GetX().ToString() + ", " + avionEscogido.GetFinalPosition().GetY().ToString();
+            txtCompany.Text = avionEscogido.GetCompany();
             if (avionEscogido.HasArrived())
             {
                 txtEstado.Text = "Ha llegado al destino";

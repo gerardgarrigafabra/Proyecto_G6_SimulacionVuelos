@@ -36,13 +36,19 @@ namespace Interfaz
         {
 
             dataGridView1.Columns.Add("Col1", "ID");
+            dataGridView1.Columns.Add("ColCompany", "Compañía");
             dataGridView1.Columns.Add("Col2", "Velocidad");
             dataGridView1.Columns.Add("Col3", "Posicion");
             dataGridView1.Columns.Add("Col4", "Destino");
 
             for (int i = 0; i < listaAviones.GetListSize(); i++)
             {
-                dataGridView1.Rows.Add(listaAviones.GetFlightPlan(i).GetId(), listaAviones.GetFlightPlan(i).GetVelocidad(), listaAviones.GetFlightPlan(i).GetCurrentPosition().GetX().ToString("F2") + ", " + listaAviones.GetFlightPlan(i).GetCurrentPosition().GetY().ToString("F2"), listaAviones.GetFlightPlan(i).GetFinalPosition().GetX().ToString("F2") + ", " + listaAviones.GetFlightPlan(i).GetFinalPosition().GetY().ToString("F2"));
+                FlightPlan F = listaAviones.GetFlightPlan(i);
+                string posicion = F.GetCurrentPosition().GetX().ToString("F2") + ", " + F.GetCurrentPosition().GetY().ToString("F2");
+                string destino = F.GetFinalPosition().GetX().ToString("F2") + ", " + F.GetFinalPosition().GetY().ToString("F2");
+
+               
+                dataGridView1.Rows.Add(F.GetId(), F.GetCompany(), F.GetVelocidad(), posicion, destino);
             }
         }
 
