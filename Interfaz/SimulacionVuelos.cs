@@ -42,11 +42,11 @@ namespace Interfaz
                     (float)listaAviones.GetFlightPlan(i).GetFinalPosition().GetX(), (float)listaAviones.GetFlightPlan(i).GetFinalPosition().GetY());
 
                 myPen.Dispose();
-
+                
                 using (Graphics g = Panel.CreateGraphics())
                 using (Pen pen = new Pen(Color.Red, 2))
                 {
-                    int radio = distanciaSeguridad;
+                    int radio = distanciaSeguridad/2;
                     int diametro = radio * 2;
 
                     g.DrawEllipse(
