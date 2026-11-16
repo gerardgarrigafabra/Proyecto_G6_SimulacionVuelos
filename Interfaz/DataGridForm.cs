@@ -27,8 +27,8 @@ namespace Interfaz
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            int fila = e.RowIndex;
-            PlaneDistance form = new PlaneDistance(F1, F2, fila);
+            int fila = e.RowIndex;           
+            PlaneDistance form = new PlaneDistance(listaAviones, fila);
             form.ShowDialog();
         }
 

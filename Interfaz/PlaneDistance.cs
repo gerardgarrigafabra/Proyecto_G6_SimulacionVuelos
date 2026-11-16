@@ -14,20 +14,31 @@ namespace Interfaz
     public partial class PlaneDistance : Form
     {
         FlightPlan F1, F2;
+        FlightPlanList listaAviones;
         int fila;
 
 
-        public PlaneDistance(FlightPlan F1, FlightPlan F2, int fila)
+        public PlaneDistance(FlightPlanList listaAviones, int fila)
         {
             InitializeComponent();
-            this.F1 = F1;
-            this.F2 = F2;
+            this.listaAviones = listaAviones;
             this.fila = fila;
         }
         private void PlaneDistance_Load(object sender, EventArgs e)
         {
+            dataGridView1.Columns.Add("Col1", "ID");
+            dataGridView1.Columns.Add("ColCompany", "Compañía");
+            dataGridView1.Columns.Add("ColDistancia", "Distancia");
 
-            valor.Text = F1.Distancia(F2).ToString();
+            for (int i = 0; i < listaAviones.GetListSize(); i++)
+            {
+                if (listaAviones.GetFlightPlan(i) != listaAviones.GetFlightPlan(fila))
+                {
+                    dataGridView1.Rows.Add(listaAviones.GetFlightPlan(i).GetId(), listaAviones.GetFlightPlan(i).GetCompany(), listaAviones.GetFlightPlan(i).Distancia(listaAviones.GetFlightPlan(fila)));
+                }
+            }
+           
+            
         }
 
 
