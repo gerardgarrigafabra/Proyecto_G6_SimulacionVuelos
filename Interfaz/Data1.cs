@@ -113,7 +113,16 @@ namespace Interfaz
                     nombreFichero.Text = dialogo.FileName; // muestro cuál se ha elegido
                     listaAviones = new FlightPlanList();
                     listaAviones.leerFichero(dialogo.FileName);
-                    MessageBox.Show("Datos cargados correctamente: " + listaAviones.GetListSize() + " vuelos");
+                    if (listaAviones.GetListSize() < 2)
+                    {
+                        MessageBox.Show("ERROR: el fichero debe contener al menos 2 vuelos");
+                        listaAviones = new FlightPlanList();
+                        return;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Datos cargados correctamente: " + listaAviones.GetListSize() + " vuelos");
+                    }
                 }
                 catch (FormatException)
                 {

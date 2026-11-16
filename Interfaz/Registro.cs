@@ -31,14 +31,17 @@ namespace Interfaz
             {
                 MessageBox.Show("Rellena el usuario y la contraseña");
             }
+            
             else if (nombre.Contains(";") || contrasena.Contains(";"))
             {
                 MessageBox.Show("No se puede usar el carácter ;");
             }
+            
             else if (contrasena != textBoxPassword2.Text)
             {
                 MessageBox.Show("Las contraseñas no coinciden");
             }
+            
             else if (usuarios.Registrar(nombre, contrasena) == false)
             {
                 MessageBox.Show("Ese usuario ya existe");
