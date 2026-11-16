@@ -12,6 +12,7 @@ namespace FlightLib
     public class FlightPlanList
     {
         List<FlightPlan> vector = new List<FlightPlan>(); //Aixo es lo del BLO3, llista indef
+        Stack<List<Position>> historialposiciones = new Stack<List<Position>>(); // per tirar cap enrere
 
         public int AddFlightPlan(FlightPlan p) //existeix el .add de normal, pq creem List<flightplan> BLO3
         {
@@ -40,10 +41,12 @@ namespace FlightLib
             {
                 vector[i].Restart();
             }
+            historialposiciones.Clear();
         }
 
         public void Mover(double tiempo)
         {
+            historialposiciones.Push(GuardarPosiciones()); // Guardem les posicions abans de moure els avions
             int i = 0;
 
             while (i < vector.Count)
@@ -405,6 +408,19 @@ namespace FlightLib
             for (int i = 0; i < vector.Count; i++)
             {
                 vector[i].SetCurrentPosition(posiciones[i]);
+            }
+        }
+
+        public bool DeshacerPaso()
+        {
+            if (historialposiciones.Count > 0)
+            {
+                RestaurarPosiciones(historialposiciones.Pop());
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
         public void guardarFichero(string fichero)

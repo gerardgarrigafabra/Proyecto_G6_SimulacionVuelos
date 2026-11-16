@@ -197,9 +197,8 @@ namespace Interfaz
         {
             timer1.Stop();
             AutoMov.Text= "Movimiento Automatico";
-            if (historialposiciones.Count > 0)
+            if (listaAviones.DeshacerPaso()==true)
             {
-                listaAviones.RestaurarPosiciones(historialposiciones.Pop());
                 Panel.Refresh();
 
                 for (int i = 0; i < listaAviones.GetListSize(); i++)
