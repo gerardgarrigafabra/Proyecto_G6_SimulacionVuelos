@@ -65,7 +65,7 @@ namespace Interfaz
         {
             if (F1 != null && F2 != null && tiempoCiclo != 0)
             {
-                bool conflicto = listaAviones.HabraConflicto(tiempoCiclo, distSeguridad);
+                bool conflicto = listaAviones.HayConflictoFuturo(distSeguridad);
 
                 if (conflicto == true)
                 {

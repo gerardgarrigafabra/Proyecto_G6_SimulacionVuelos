@@ -89,132 +89,19 @@ namespace FlightLib
             return false;
         }
 
-        //Volem trobar la velocitat pq no entrin en conflicte, modifico sempre flightplan b.
-        private double VelocidadSegura(FlightPlan FA, FlightPlan FB, double distanciaSeguridad)
+        // Funció que itera el detector de futurs conflictes per tota la llista
+        public bool HayConflictoFuturo(double distanciaSeguridad)
         {
-            Position PosA = FA.GetCurrentPosition();
-            Position PosB = FB.GetCurrentPosition();
-            //distancia que li queda al final
-            double distA= PosA.Distancia(FA.GetFinalPosition());
-            double distB = PosB.Distancia(FB.GetFinalPosition());
-
-            double velA = FA.GetVelocidad()/60;
-            double velB = FB.GetVelocidad()/60;
-
-            //si algun vol ha arribat, no cal calcular res
-            if (distA == 0 || distB == 0 || velA == 0 || velB == 0)
-            {
-                return -1;
-            }
-
-            double tempsA= distA / velA;
-            double tempsB = distB / velB;
-
-            // lo que li falta a cada vol per arribar al final
-            double dAx=FA.GetFinalPosition().GetX() - PosA.GetX();
-            double dAy = FA.GetFinalPosition().GetY() - PosA.GetY();
-            double dBx = FB.GetFinalPosition().GetX() - PosB.GetX();
-            double dBy = FB.GetFinalPosition().GetY() - PosB.GetY();
-
-            //temps on estan mes a prop
-            double tmin=FA.TiempoMinimo(PosA.GetX()-PosB.GetX(), PosA.GetY() - PosB.GetY(), dAx/tempsA-dBx/tempsB, dAy/tempsA-dBy/tempsB,tempsA);
-
-            if (tmin<=0)
-            {
-                return -1;
-            }
-            //posicio al cap de tmin
-            double Ax = PosA.GetX() + dAx / tempsA * tmin;
-            double Ay = PosA.GetY() + dAy / tempsA * tmin;
-
-            //vector de b fins a a
-            double vectorx = Ax - PosB.GetX();
-            double vectory = Ay - PosB.GetY();
-
-            //eq 2n grau per trobar la velocitat de b pq no hi hagi conflicte
-            double resultado = (vectorx*dBx+vectory* dBy)*(vectorx*dBx+vectory* dBy)-(dBx*dBx+dBy*dBy)*((vectorx*vectorx+vectory*vectory)-distanciaSeguridad*distanciaSeguridad);
-
-            if (resultado < 0)
-            {
-                return -1;
-            }
-            //l'eq de segon grau ens donara dos resultats
-            double res1=(vectorx+Math.Sqrt(resultado)) / (dBx * dBx + dBy * dBy);
-            double res2 = (vectorx - Math.Sqrt(resultado)) / (dBx * dBx + dBy * dBy);
-
-            double sActual = tmin / tempsB;
-
-            // Quant s'allunya cada solució de la fracció actual
-            double dif1 = res1 - sActual;
-            double dif2 = res2 - sActual;
-
-            // Si la diferència és negativa, la fem positiva (això és el valor absolut)
-            if (dif1 < 0)
-            {
-                dif1 = -dif1;
-            }
-            if (dif2 < 0)
-            {
-                dif2 = -dif2;
-            }
-
-            // Triem la solució més propera a l'actual
-            double s;
-            if (dif1 < dif2)
-            {
-                s = res1;
-            }
-            else
-            {
-                s = res2;
-            }
-            if (s <= 0)
-            {
-                return -1;
-            }
-
-            // velocitat = distància recorreguda / temps
-            return distB * s / tmin * 60;
-        }
-        public bool HabraConflicto(double tiempoCiclo, double distanciaSeguridad)
-        {
-            List<FlightPlan> copias = new List<FlightPlan>();
-
-            // creem una llista exactament igual a la original només per simularla individualment i det. si hi haura conf en la trajectoria sense moure originals
             int i = 0;
 
             while (i < vector.Count)
             {
-                FlightPlan original = vector[i];
-
-                FlightPlan copia = new FlightPlan(
-                    original.GetId(),
-                    original.GetCurrentPosition().GetX(),
-                    original.GetCurrentPosition().GetY(),
-                    original.GetFinalPosition().GetX(),
-                    original.GetFinalPosition().GetY(),
-                    original.GetVelocidad()
-                );
-
-                copias.Add(copia);
-                i++;
-            }
-
-            int ciclos = 0;
-            int maxCiclos = 100000;
-
-            // amb buscar det si hi ha conflicte ja de primeres
-            bool conflicto = false;
-
-            i = 0;
-            while (i < copias.Count && conflicto == false)
-            {
                 int j = i + 1;
 
-                while (j < copias.Count && conflicto == false)
+                while (j < vector.Count)
                 {
-                    if (copias[i].Conflicto(copias[j], distanciaSeguridad))
-                        conflicto = true;
+                    if (vector[i].ConflictoFuturo(vector[j], distanciaSeguridad))
+                        return true;
 
                     j++;
                 }
@@ -222,146 +109,88 @@ namespace FlightLib
                 i++;
             }
 
-            bool seguirSimulando = true;
-
-            // els vols o arriven o conflicte
-            while (conflicto == false && ciclos < maxCiclos && seguirSimulando == true)
-            {
-                bool todosHanLlegado = true;
-
-                i = 0;
-
-                while (i < copias.Count) //simular tots fins que arriven
-                {
-                    if (copias[i].HasArrived() == false)
-                    {
-                        todosHanLlegado = false;
-                        copias[i].Mover(tiempoCiclo);
-                    }
-
-                    i++;
-                }
-
-                if (todosHanLlegado == true)
-                {
-                    seguirSimulando = false;
-                }
-                else //comprovem els q no han arrivat
-                {
-                    i = 0;
-
-                    while (i < copias.Count && conflicto == false)
-                    {
-                        int j = i + 1;
-
-                        while (j < copias.Count && conflicto == false)
-                        {
-                            if (copias[i].Conflicto(copias[j], distanciaSeguridad))
-                                conflicto = true;
-
-                            j++;
-                        }
-
-                        i++;
-                    }
-
-                    ciclos++;
-                }
-            }
-            return conflicto;
+            return false;
         }
 
+        // Funció que itera la correcció de velocitat per tota la llista
         public bool ResolverConflictosLista(double distanciaSeguridad)
         {
-            // Resolem els conflictes en una llista nova i mirem es poden resoldre avans de aplicar els canvis a la nostre.
-            FlightPlanList copias = new FlightPlanList();
-
-            int i = 0;
-
-            while (i < vector.Count)
+            // 1. Creem una còpia de la llista actual per provar les correccions sense alterar els originals encara
+            List<FlightPlan> copias = new List<FlightPlan>();
+            for (int k = 0; k < vector.Count; k++)
             {
-                FlightPlan original = vector[i];
-
+                FlightPlan orig = vector[k];
                 FlightPlan copia = new FlightPlan(
-                    original.GetId(),
-                    original.GetCurrentPosition().GetX(),
-                    original.GetCurrentPosition().GetY(),
-                    original.GetFinalPosition().GetX(),
-                    original.GetFinalPosition().GetY(),
-                    original.GetVelocidad()
+                    orig.GetId(),
+                    orig.GetCurrentPosition().GetX(),
+                    orig.GetCurrentPosition().GetY(),
+                    orig.GetFinalPosition().GetX(),
+                    orig.GetFinalPosition().GetY(),
+                    orig.GetVelocidad()
                 );
-
-                copias.AddFlightPlan(copia);
-                i++;
+                copia.SetCompany(orig.GetCompany());
+                copias.Add(copia);
             }
 
-            bool hayConflicto = false;
+            int maxIntentos = 20; // Límit d'iteracions per evitar bucles infinits si dos vols tenen un conflicte irresoluble
+            int intento = 0;
+            bool quedanConflictos = true;
 
-            i = 0;
-
-            while (i < copias.GetListSize())
+            // 2. Iterem mentre hi hagi conflictes i no superem el màxim d'intents
+            while (quedanConflictos && intento < maxIntentos)
             {
-                int j = i + 1;
+                quedanConflictos = false;
 
-                while (j < copias.GetListSize())
+                for (int i = 0; i < copias.Count; i++)
                 {
-                    hayConflicto = false;
-                    if (copias.GetFlightPlan(i).DistanciaMinima(copias.GetFlightPlan(j)) < distanciaSeguridad)
+                    for (int j = i + 1; j < copias.Count; j++)
                     {
-                        hayConflicto = true;
-
-                        // Calculem la velocitat nova del vol j
-                        double nuevaVelocidad = VelocidadSegura(copias.GetFlightPlan(i),
-                                                                copias.GetFlightPlan(j),
-                                                                distanciaSeguridad);
-
-                        // Si ha retornat -1, no toquem res
-                        if (nuevaVelocidad > 0)
+                        // Comprovem si aquest parell de vols entrarà en conflicte en el futur
+                        if (copias[i].ConflictoFuturo(copias[j], distanciaSeguridad))
                         {
-                            copias.GetFlightPlan(j).SetVelocidad(nuevaVelocidad);
+                            // Calculem la nova velocitat segura per al segon vol (j) respecte al primer (i)
+                            // Nota: afegim un petit marge de seguretat (ex: + 0.01) per evitar errors de precisió decimal en tornar a comprovar
+                            double nuevaVel = copias[i].VelocidadSegura(copias[j], distanciaSeguridad + 0.01);
+
+                            if (nuevaVel > 0)
+                            {
+                                copias[j].SetVelocidad(nuevaVel);
+                                // Com que hem modificat una velocitat, marquem que hem de tornar a revisar tota la llista
+                                // per assegurar-nos que aquest canvi no ha provocat un nou conflicte amb un tercer vol
+                                quedanConflictos = true;
+                            }
                         }
                     }
-
-                    j++;
                 }
-
-                i++;
+                intento++;
             }
 
-            // queda algun conflicte?
-            i = 0;
-            while (i < copias.GetListSize())
+            // 3. Verificació final: Comprovem si després de les iteracions realment ja no queda cap conflicte a les còpies
+            bool hayAlgunConflictoFinal = false;
+            for (int i = 0; i < copias.Count; i++)
             {
-                int j = i + 1;
-
-                while (j < copias.GetListSize())
+                for (int j = i + 1; j < copias.Count; j++)
                 {
-                    if (copias.GetFlightPlan(i).DistanciaMinima(copias.GetFlightPlan(j)) < distanciaSeguridad)
+                    if (copias[i].ConflictoFuturo(copias[j], distanciaSeguridad))
                     {
-                        hayConflicto = true;
+                        hayAlgunConflictoFinal = true;
+                        break;
                     }
-
-                    j++;
                 }
-
-                i++;
+                if (hayAlgunConflictoFinal) break;
             }
 
-            // apliquem velocitats
-            if (hayConflicto == false)
+            // 4. Si s'han resolt tots els conflictes satisfactòriament, apliquem les noves velocitats als vols originals
+            if (!hayAlgunConflictoFinal)
             {
-                i = 0;
-                while (i < vector.Count)
+                for (int i = 0; i < vector.Count; i++)
                 {
-                    vector[i].SetVelocidad(copias.GetFlightPlan(i).GetVelocidad());
-                    i++;
+                    vector[i].SetVelocidad(copias[i].GetVelocidad());
                 }
-                return false;
+                return false; // Tots els conflictes resolts
             }
-            else
-            {
-                return true;
-            }
+
+            return true; // No s'ha pogut trobar una combinació sense conflictes (els vols originals queden intactes)
         }
 
         public void leerFichero(string fichero)

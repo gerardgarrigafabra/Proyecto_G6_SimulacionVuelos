@@ -18,7 +18,7 @@
                 string company = "-";
 
         // Constructures
-        public FlightPlan(string id, double cpx, double cpy, double fpx, double fpy, double velocidad)
+                public FlightPlan(string id, double cpx, double cpy, double fpx, double fpy, double velocidad)
                 {
                     this.id = id;
                     this.currentPosition = new Position(cpx, cpy);
@@ -244,8 +244,106 @@
                     return distanciaMinima;
                 }
 
+                // Funció per comprovar si hi haurà un conflicte en el futur amb un altre vol
+                public bool ConflictoFuturo(FlightPlan otro, double distanciaSeguridad)
+                {
+                    return this.DistanciaMinima(otro) < distanciaSeguridad;
+                }
 
+                // Funció per calcular la velocitat segura respecte a un altre vol
+                public double VelocidadSegura(FlightPlan otro, double distanciaSeguridad)
+                {
+                    Position PosA = this.GetCurrentPosition();
+                    Position PosB = otro.GetCurrentPosition();
 
+                    // Distància que li queda al final
+                    double distA = PosA.Distancia(this.GetFinalPosition());
+                    double distB = PosB.Distancia(otro.GetFinalPosition());
+
+                    double velA = this.GetVelocidad() / 60.0;
+                    double velB = otro.GetVelocidad() / 60.0;
+
+                    if (distA == 0 || distB == 0 || velA == 0 || velB == 0)
+                        return -1;
+
+                    double tempsA = distA / velA;
+                    double tempsB = distB / velB;
+
+                    // Vectors de desplaçament total que li falta a cada vol
+                    double dAx = this.GetFinalPosition().GetX() - PosA.GetX();
+                    double dAy = this.GetFinalPosition().GetY() - PosA.GetY();
+                    double dBx = otro.GetFinalPosition().GetX() - PosB.GetX();
+                    double dBy = otro.GetFinalPosition().GetY() - PosB.GetY();
+
+                    // Velocitats actuals en components
+                    double vAx = dAx / tempsA;
+                    double vAy = dAy / tempsA;
+                    double vBx = dBx / tempsB;
+                    double vBy = dBy / tempsB;
+
+                    // Temps on estan més a prop actualment
+                    double rx = PosA.GetX() - PosB.GetX();
+                    double ry = PosA.GetY() - PosB.GetY();
+                    double tmin = this.TiempoMinimo(rx, ry, vAx - vBx, vAy - vBy, Math.Min(tempsA, tempsB));
+
+                    if (tmin <= 0)
+                        return -1;
+
+                    // Posició de A en el moment del conflicte (tmin)
+                    double Ax = PosA.GetX() + vAx * tmin;
+                    double Ay = PosA.GetY() + vAy * tmin;
+
+                    // Vector des de la posició inicial de B fins a la posició de A en tmin
+                    double vectorx = Ax - PosB.GetX();
+                    double vectory = Ay - PosB.GetY();
+
+                    // Coeficients de l'equació de 2n grau: A*s^2 + B*s + C = 0
+                    // On 's' és la fracció del recorregut que ha de fer B en el temps tmin per quedar a distància exacta = distanciaSeguridad
+                    double A = dBx * dBx + dBy * dBy;
+                    double B = -2.0 * (vectorx * dBx + vectory * dBy);
+                    double C = (vectorx * vectorx + vectory * vectory) - (distanciaSeguridad * distanciaSeguridad);
+
+                    double discriminant = B * B - 4.0 * A * C;
+
+                    if (discriminant < 0)
+                        return -1;
+
+                    // Les dues solucions exactes on la distància és igual a distanciaSeguridad
+                    double s1 = (-B + Math.Sqrt(discriminant)) / (2.0 * A);
+                    double s2 = (-B - Math.Sqrt(discriminant)) / (2.0 * A);
+
+                    double sActual = tmin / tempsB;
+
+                    // Triem la solució més gran que sigui menor que l'actual (frenar el mínim imprescindible)
+                    double s = -1;
+                    if (s1 > 0 && s1 < sActual && s2 > 0 && s2 < sActual)
+                        s = Math.Max(s1, s2);
+                    else if (s1 > 0 && s1 < sActual)
+                        s = s1;
+                    else if (s2 > 0 && s2 < sActual)
+                        s = s2;
+
+                    if (s <= 0)
+                        return -1;
+
+                    // Velocitat exacta en unitats/hora
+                    return (distB * s / tmin) * 60.0;
+                }
+
+                // Funció per solucionar el conflicte modificant la velocitat de l'altre vol ('otro')
+                public bool SolucionarConflicte(FlightPlan otro, double distanciaSeguridad)
+                {
+                    double nuevaVelocidad = this.VelocidadSegura(otro, distanciaSeguridad);
+
+                    if (nuevaVelocidad > 0)
+                    {
+                        otro.SetVelocidad(nuevaVelocidad);
+                        return true;
+                    }
+
+                return false;
+                }
+                
                 public bool Conflicto(FlightPlan b, double distanciaSeguridad)
                 {
                     bool conflicto = false;

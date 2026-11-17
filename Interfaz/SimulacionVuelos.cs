@@ -87,7 +87,7 @@ namespace Interfaz
         // informa de si los vuelos entraran en conflicto o no
         private void buttonConflicto_Click(object sender, EventArgs e)
         {
-            bool conflicto = listaAviones.HabraConflicto(tiempoCiclo, distanciaSeguridad);
+            bool conflicto = listaAviones.HayConflictoFuturo(distanciaSeguridad);
 
             if (conflicto == true)
                 MessageBox.Show("Los vuelos entrarán en conflicto.");
