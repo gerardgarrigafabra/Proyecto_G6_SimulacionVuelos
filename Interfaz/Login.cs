@@ -19,7 +19,7 @@ namespace Interfaz
         public Login()
         {
             InitializeComponent();
-            usuarios.CargarDeFichero();
+            usuarios.CrearBaseDeDatos();
         }
 
         private void buttonEntrar_Click(object sender, EventArgs e)
