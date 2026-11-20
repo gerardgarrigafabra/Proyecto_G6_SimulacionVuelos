@@ -22,6 +22,86 @@ namespace Interfaz
         public Principal()
         {
             InitializeComponent();
+            TemaVisual.Aplicar(this);
+            CrearInterfaz();
+            AplicarEstiloMenu();
+            CrearBarraEstado();
+        }
+        private void CrearInterfaz()
+        {
+            this.Text = "Flight Control Simulator";
+            this.BackColor = Color.FromArgb(240, 244, 249);
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.Size = new Size(1100, 700);
+
+            Label titulo = new Label();
+            titulo.Text = "Proyecto de Simulación de Vuelos";
+            titulo.Font = new Font("Segoe UI", 26, FontStyle.Bold);
+            titulo.ForeColor = Color.FromArgb(30, 55, 85);
+            titulo.Location = new Point(50, 90);
+            titulo.AutoSize = true;
+
+            Label subtitulo = new Label();
+            subtitulo.Text = "Grupo 6_Guillem Zapater, Pau Tondo, Gerard Garriga, Luca Romero";
+            subtitulo.Font = new Font("Segoe UI", 12);
+            subtitulo.ForeColor = Color.Gray;
+            subtitulo.Location = new Point(53, 145);
+            subtitulo.AutoSize = true;
+
+            this.Controls.Add(titulo);
+            this.Controls.Add(subtitulo);
+        }
+
+        private void AplicarEstiloMenu()
+        {
+            menuStrip1.BackColor = Color.FromArgb(30, 55, 85);
+            menuStrip1.ForeColor = Color.White;
+            menuStrip1.Font = new Font("Segoe UI", 10, FontStyle.Regular);
+            menuStrip1.Padding = new Padding(8, 5, 8, 5);
+
+            menúSimulacionToolStripMenuItem.ForeColor = Color.White;
+            menúSimulacionToolStripMenuItem.BackColor =
+                Color.FromArgb(30, 55, 85);
+
+            menúSimulacionToolStripMenuItem.DropDown.BackColor = Color.White;
+
+            introducciónDeDatosToolStripMenuItem.BackColor = Color.White;
+            introducciónDeDatosToolStripMenuItem.ForeColor =
+                Color.FromArgb(40, 50, 65);
+
+            distanciasDeSeguridadYTiemposDeCicloToolStripMenuItem.BackColor =
+                Color.White;
+            distanciasDeSeguridadYTiemposDeCicloToolStripMenuItem.ForeColor =
+                Color.FromArgb(40, 50, 65);
+
+            simulaciónDeVuelosToolStripMenuItem.BackColor = Color.White;
+            simulaciónDeVuelosToolStripMenuItem.ForeColor =
+                Color.FromArgb(40, 50, 65);
+        }
+
+        private void CrearBarraEstado()
+        {
+            StatusStrip barra = new StatusStrip();
+
+            barra.BackColor = Color.FromArgb(30, 55, 85);
+            barra.ForeColor = Color.White;
+            barra.SizingGrip = false;
+
+            ToolStripStatusLabel nombre = new ToolStripStatusLabel();
+            nombre.Text = "FLIGHT CONTROL SIMULATOR";
+            nombre.ForeColor = Color.White;
+            nombre.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+
+            ToolStripStatusLabel estado = new ToolStripStatusLabel();
+            estado.Text = "Sistema listo";
+            estado.ForeColor = Color.LightGreen;
+            estado.Spring = true;
+            estado.TextAlign = ContentAlignment.MiddleRight;
+
+            barra.Items.Add(nombre);
+            barra.Items.Add(estado);
+
+            this.Controls.Add(barra);
         }
 
 

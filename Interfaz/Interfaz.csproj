@@ -107,6 +107,7 @@
     <Compile Include="SimulacionVuelos.Designer.cs">
       <DependentUpon>SimulacionVuelos.cs</DependentUpon>
     </Compile>
+    <Compile Include="TemaVisual.cs" />
     <EmbeddedResource Include="Data1.resx">
       <DependentUpon>Data1.cs</DependentUpon>
     </EmbeddedResource>

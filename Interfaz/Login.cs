@@ -20,6 +20,7 @@ namespace Interfaz
         {
             InitializeComponent();
             usuarios.CrearBaseDeDatos();
+            TemaVisual.Aplicar(this);
         }
 
         private void buttonEntrar_Click(object sender, EventArgs e)

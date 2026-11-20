@@ -18,6 +18,7 @@ namespace Interfaz
         {
             InitializeComponent();
             this.avionEscogido = avionEscogido;
+            TemaVisual.Aplicar(this);
         }
 
         private void InfoAvion_Load(object sender, EventArgs e)

@@ -22,7 +22,8 @@ namespace Interfaz
             this.listaAviones = listaAviones;
             F1 = listaAviones.GetFlightPlan(0);
             F2 = listaAviones.GetFlightPlan(1);
-            
+            TemaVisual.Aplicar(this);
+
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)

@@ -23,6 +23,7 @@ namespace Interfaz
             InitializeComponent();
             this.listaAviones = listaAviones;
             this.fila = fila;
+            TemaVisual.Aplicar(this);
         }
         private void PlaneDistance_Load(object sender, EventArgs e)
         {

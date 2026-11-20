@@ -17,6 +17,7 @@ namespace Interfaz
         public Data2()
         {
             InitializeComponent();
+            TemaVisual.Aplicar(this);
         }
 
         private void buttonCargar_Click(object sender, EventArgs e)

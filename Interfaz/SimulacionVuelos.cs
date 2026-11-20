@@ -29,7 +29,8 @@ namespace Interfaz
             this.listaAviones = listaAviones;
             this.tiempoCiclo = tiempoCiclo;
             this.distanciaSeguridad = distSeguridad;
-            
+            TemaVisual.Aplicar(this);
+
         }
 
         private void Panel_Paint(object sender, PaintEventArgs e)

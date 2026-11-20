@@ -20,6 +20,7 @@ namespace Interfaz
         {
             InitializeComponent();
             this.usuarios = usuarios;
+            TemaVisual.Aplicar(this);
         }
 
         private void buttonRegistrar_Click(object sender, EventArgs e)
