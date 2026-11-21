@@ -141,5 +141,10 @@ namespace Interfaz
                 }
             }
         }
+
+        private void Data1_Load(object sender, EventArgs e)
+        {
+            TemaVisual.Aplicar(this);
+        }
     }
 }

@@ -54,10 +54,10 @@
             // Panel
             // 
             this.Panel.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.Panel.Location = new System.Drawing.Point(422, 32);
-            this.Panel.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.Panel.Location = new System.Drawing.Point(633, 49);
+            this.Panel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Panel.Name = "Panel";
-            this.Panel.Size = new System.Drawing.Size(490, 502);
+            this.Panel.Size = new System.Drawing.Size(735, 772);
             this.Panel.TabIndex = 0;
             this.Panel.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel_Paint);
             // 
@@ -65,10 +65,9 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.label1.Location = new System.Drawing.Point(418, 6);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(627, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(24, 26);
+            this.label1.Size = new System.Drawing.Size(35, 37);
             this.label1.TabIndex = 0;
             this.label1.Text = "0";
             // 
@@ -76,10 +75,9 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.label2.Location = new System.Drawing.Point(396, 31);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(594, 48);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(24, 26);
+            this.label2.Size = new System.Drawing.Size(35, 37);
             this.label2.TabIndex = 1;
             this.label2.Text = "0";
             // 
@@ -87,10 +85,9 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.label3.Location = new System.Drawing.Point(372, 510);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Location = new System.Drawing.Point(556, 607);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(48, 26);
+            this.label3.Size = new System.Drawing.Size(71, 37);
             this.label3.TabIndex = 2;
             this.label3.Text = "499";
             // 
@@ -98,19 +95,18 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.label4.Location = new System.Drawing.Point(870, 6);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Location = new System.Drawing.Point(1228, 9);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(48, 26);
+            this.label4.Size = new System.Drawing.Size(71, 37);
             this.label4.TabIndex = 3;
             this.label4.Text = "499";
             // 
             // Mover
             // 
-            this.Mover.Location = new System.Drawing.Point(60, 68);
-            this.Mover.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.Mover.Location = new System.Drawing.Point(90, 105);
+            this.Mover.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Mover.Name = "Mover";
-            this.Mover.Size = new System.Drawing.Size(128, 68);
+            this.Mover.Size = new System.Drawing.Size(192, 105);
             this.Mover.TabIndex = 4;
             this.Mover.Text = "Mover Vuelos";
             this.Mover.UseVisualStyleBackColor = true;
@@ -118,10 +114,10 @@
             // 
             // AutoMov
             // 
-            this.AutoMov.Location = new System.Drawing.Point(60, 150);
-            this.AutoMov.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.AutoMov.Location = new System.Drawing.Point(90, 231);
+            this.AutoMov.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.AutoMov.Name = "AutoMov";
-            this.AutoMov.Size = new System.Drawing.Size(128, 68);
+            this.AutoMov.Size = new System.Drawing.Size(192, 105);
             this.AutoMov.TabIndex = 5;
             this.AutoMov.Text = "Movimiento Automatico";
             this.AutoMov.UseVisualStyleBackColor = true;
@@ -133,10 +129,10 @@
             // 
             // MostrarVuelosBtn
             // 
-            this.MostrarVuelosBtn.Location = new System.Drawing.Point(60, 239);
-            this.MostrarVuelosBtn.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.MostrarVuelosBtn.Location = new System.Drawing.Point(90, 368);
+            this.MostrarVuelosBtn.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.MostrarVuelosBtn.Name = "MostrarVuelosBtn";
-            this.MostrarVuelosBtn.Size = new System.Drawing.Size(128, 68);
+            this.MostrarVuelosBtn.Size = new System.Drawing.Size(192, 105);
             this.MostrarVuelosBtn.TabIndex = 6;
             this.MostrarVuelosBtn.Text = "Mostar Vuelos";
             this.MostrarVuelosBtn.UseVisualStyleBackColor = true;
@@ -144,10 +140,10 @@
             // 
             // buttonConflicto
             // 
-            this.buttonConflicto.Location = new System.Drawing.Point(218, 239);
-            this.buttonConflicto.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.buttonConflicto.Location = new System.Drawing.Point(327, 368);
+            this.buttonConflicto.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.buttonConflicto.Name = "buttonConflicto";
-            this.buttonConflicto.Size = new System.Drawing.Size(128, 68);
+            this.buttonConflicto.Size = new System.Drawing.Size(192, 105);
             this.buttonConflicto.TabIndex = 7;
             this.buttonConflicto.Text = "¿Habrá conflicto?";
             this.buttonConflicto.UseVisualStyleBackColor = true;
@@ -158,20 +154,19 @@
             this.labelAlarma.AutoSize = true;
             this.labelAlarma.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.labelAlarma.ForeColor = System.Drawing.Color.Red;
-            this.labelAlarma.Location = new System.Drawing.Point(22, 504);
-            this.labelAlarma.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelAlarma.Location = new System.Drawing.Point(33, 775);
             this.labelAlarma.Name = "labelAlarma";
-            this.labelAlarma.Size = new System.Drawing.Size(78, 20);
+            this.labelAlarma.Size = new System.Drawing.Size(111, 29);
             this.labelAlarma.TabIndex = 8;
             this.labelAlarma.Text = "ALERTA";
             this.labelAlarma.Visible = false;
             // 
             // CambiarVelocidadBtn
             // 
-            this.CambiarVelocidadBtn.Location = new System.Drawing.Point(26, 406);
-            this.CambiarVelocidadBtn.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.CambiarVelocidadBtn.Location = new System.Drawing.Point(39, 625);
+            this.CambiarVelocidadBtn.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.CambiarVelocidadBtn.Name = "CambiarVelocidadBtn";
-            this.CambiarVelocidadBtn.Size = new System.Drawing.Size(128, 63);
+            this.CambiarVelocidadBtn.Size = new System.Drawing.Size(192, 97);
             this.CambiarVelocidadBtn.TabIndex = 9;
             this.CambiarVelocidadBtn.Text = "Cambiar Velocidad";
             this.CambiarVelocidadBtn.UseVisualStyleBackColor = true;
@@ -180,45 +175,43 @@
             // LabelIdCv
             // 
             this.LabelIdCv.AutoSize = true;
-            this.LabelIdCv.Location = new System.Drawing.Point(236, 422);
-            this.LabelIdCv.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.LabelIdCv.Location = new System.Drawing.Point(354, 649);
             this.LabelIdCv.Name = "LabelIdCv";
-            this.LabelIdCv.Size = new System.Drawing.Size(18, 13);
+            this.LabelIdCv.Size = new System.Drawing.Size(26, 20);
             this.LabelIdCv.TabIndex = 10;
             this.LabelIdCv.Text = "ID";
             // 
             // labelNuevaVel
             // 
             this.labelNuevaVel.AutoSize = true;
-            this.labelNuevaVel.Location = new System.Drawing.Point(166, 450);
-            this.labelNuevaVel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelNuevaVel.Location = new System.Drawing.Point(249, 692);
             this.labelNuevaVel.Name = "labelNuevaVel";
-            this.labelNuevaVel.Size = new System.Drawing.Size(89, 13);
+            this.labelNuevaVel.Size = new System.Drawing.Size(128, 20);
             this.labelNuevaVel.TabIndex = 11;
             this.labelNuevaVel.Text = "Nueva Velocidad";
             // 
             // textBoxID
             // 
-            this.textBoxID.Location = new System.Drawing.Point(270, 420);
-            this.textBoxID.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.textBoxID.Location = new System.Drawing.Point(405, 646);
+            this.textBoxID.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.textBoxID.Name = "textBoxID";
-            this.textBoxID.Size = new System.Drawing.Size(76, 20);
+            this.textBoxID.Size = new System.Drawing.Size(112, 26);
             this.textBoxID.TabIndex = 12;
             // 
             // textBoxNuevaVelocidad
             // 
-            this.textBoxNuevaVelocidad.Location = new System.Drawing.Point(270, 445);
-            this.textBoxNuevaVelocidad.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.textBoxNuevaVelocidad.Location = new System.Drawing.Point(405, 685);
+            this.textBoxNuevaVelocidad.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.textBoxNuevaVelocidad.Name = "textBoxNuevaVelocidad";
-            this.textBoxNuevaVelocidad.Size = new System.Drawing.Size(76, 20);
+            this.textBoxNuevaVelocidad.Size = new System.Drawing.Size(112, 26);
             this.textBoxNuevaVelocidad.TabIndex = 13;
             // 
             // deshacerBtn
             // 
-            this.deshacerBtn.Location = new System.Drawing.Point(216, 68);
-            this.deshacerBtn.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.deshacerBtn.Location = new System.Drawing.Point(324, 105);
+            this.deshacerBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.deshacerBtn.Name = "deshacerBtn";
-            this.deshacerBtn.Size = new System.Drawing.Size(128, 68);
+            this.deshacerBtn.Size = new System.Drawing.Size(192, 105);
             this.deshacerBtn.TabIndex = 15;
             this.deshacerBtn.Text = "Mover Vuelos Para Atras";
             this.deshacerBtn.UseVisualStyleBackColor = true;
@@ -226,10 +219,10 @@
             // 
             // buttonGuardar
             // 
-            this.buttonGuardar.Location = new System.Drawing.Point(300, 10);
-            this.buttonGuardar.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.buttonGuardar.Location = new System.Drawing.Point(450, 15);
+            this.buttonGuardar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonGuardar.Name = "buttonGuardar";
-            this.buttonGuardar.Size = new System.Drawing.Size(92, 34);
+            this.buttonGuardar.Size = new System.Drawing.Size(138, 52);
             this.buttonGuardar.TabIndex = 16;
             this.buttonGuardar.Text = "Guardar Vuelos";
             this.buttonGuardar.UseVisualStyleBackColor = true;
@@ -237,10 +230,10 @@
             // 
             // buttonCerrar
             // 
-            this.buttonCerrar.Location = new System.Drawing.Point(8, 10);
-            this.buttonCerrar.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.buttonCerrar.Location = new System.Drawing.Point(12, 15);
+            this.buttonCerrar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonCerrar.Name = "buttonCerrar";
-            this.buttonCerrar.Size = new System.Drawing.Size(92, 34);
+            this.buttonCerrar.Size = new System.Drawing.Size(138, 52);
             this.buttonCerrar.TabIndex = 17;
             this.buttonCerrar.Text = "Cerrar";
             this.buttonCerrar.UseVisualStyleBackColor = true;
@@ -248,9 +241,10 @@
             // 
             // reiniciarBtn
             // 
-            this.reiniciarBtn.Location = new System.Drawing.Point(216, 150);
+            this.reiniciarBtn.Location = new System.Drawing.Point(324, 231);
+            this.reiniciarBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.reiniciarBtn.Name = "reiniciarBtn";
-            this.reiniciarBtn.Size = new System.Drawing.Size(128, 68);
+            this.reiniciarBtn.Size = new System.Drawing.Size(192, 105);
             this.reiniciarBtn.TabIndex = 18;
             this.reiniciarBtn.Text = "Reiniciar vuelos";
             this.reiniciarBtn.UseVisualStyleBackColor = true;
@@ -258,9 +252,9 @@
             // 
             // SimulacionVuelos
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(962, 549);
+            this.ClientSize = new System.Drawing.Size(1443, 845);
             this.Controls.Add(this.reiniciarBtn);
             this.Controls.Add(this.buttonCerrar);
             this.Controls.Add(this.buttonGuardar);
@@ -280,7 +274,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Panel);
-            this.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "SimulacionVuelos";
             this.Text = "SimulacionVuelos";
             this.Load += new System.EventHandler(this.SimulacionVuelos_Load);
