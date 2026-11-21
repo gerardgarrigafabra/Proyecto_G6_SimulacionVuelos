@@ -257,7 +257,28 @@ namespace Interfaz
             timer1.Stop();
             Close();
         }
-    
+
+        private void reiniciarBtn_Click(object sender, EventArgs e)
+        {
+            timer1.Stop();
+            AutoMov.Text = "Movimiento Automatico";
+
+            listaAviones.RestartList();
+
+            historialposiciones.Clear();
+
+            for (int i = 0; i < listaAviones.GetListSize(); i++)
+            {
+                listaPictureBoxes[i].Location = new Point(
+                    Convert.ToInt32(listaAviones.GetFlightPlan(i).GetCurrentPosition().GetX()) - 10,
+                    Convert.ToInt32(listaAviones.GetFlightPlan(i).GetCurrentPosition().GetY()) - 10);
+            }
+
+            Panel.Refresh();
+            labelAlarma.Visible = false;
+
+            MessageBox.Show("Todos los vuelos han vuelto a su posición inicial.");
+        }
     }
     
 }

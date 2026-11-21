@@ -19,7 +19,16 @@ namespace Interfaz
         public Login()
         {
             InitializeComponent();
-            usuarios.CrearBaseDeDatos();
+
+            bool existeBD = usuarios.CrearBaseDeDatos();
+
+            if (existeBD == false)
+            {
+                MessageBox.Show("ERROR: No se encuentra el archivo de la base de datos de usuarios.");
+                buttonEntrar.Enabled = false;
+                buttonRegistrar.Enabled = false;
+            }
+
             TemaVisual.Aplicar(this);
         }
 

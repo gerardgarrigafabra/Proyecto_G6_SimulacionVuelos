@@ -11,17 +11,35 @@ namespace FlightLib
     public class UsuarioList
     {
         string conexion = "Data Source=usuarios.db;Version=3;";
-
-        public void CrearBaseDeDatos()
+        public bool ExisteBaseDeDatos()
         {
+            if (File.Exists("usuarios.db"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool CrearBaseDeDatos()
+        {
+            if (ExisteBaseDeDatos() == false)
+            {
+                return false;
+            }
+
             SQLiteConnection con = new SQLiteConnection(conexion);
-            con.Open(); 
+            con.Open();
 
             SQLiteCommand comando = new SQLiteCommand(
                 "CREATE TABLE IF NOT EXISTS usuarios (nombre TEXT PRIMARY KEY, contrasena TEXT NOT NULL)", con);
             comando.ExecuteNonQuery();
 
             con.Close();
+
+            return true;
         }
 
         // true si hi ha un usuari amb aquest nom a la base de dades

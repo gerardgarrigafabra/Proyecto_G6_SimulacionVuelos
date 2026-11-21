@@ -193,16 +193,17 @@ namespace FlightLib
             return true; // No s'ha pogut trobar una combinació sense conflictes (els vols originals queden intactes)
         }
 
-        public void leerFichero(string fichero)
+
+        public bool leerFichero(string fichero)
         {
             StreamReader R = new StreamReader(fichero);
 
             string linea = R.ReadLine();
+
             while (linea != null)
             {
-                 string[] trozos = linea.Split(' ');
+                string[] trozos = linea.Split(' ');
 
-                // Carreguem les línies amb  7 camps: id companyia x y destinoX destinoY velocitat
                 if (linea != "")
                 {
                     if (trozos.Length == 7)
@@ -210,8 +211,14 @@ namespace FlightLib
                         FlightPlan F = new FlightPlan(trozos[0], Convert.ToDouble(trozos[2]),
                             Convert.ToDouble(trozos[3]), Convert.ToDouble(trozos[4]), Convert.ToDouble(trozos[5]),
                             Convert.ToDouble(trozos[6]));
+
                         F.SetCompany(trozos[1]);
                         vector.Add(F);
+                    }
+                    else
+                    {
+                        R.Close();
+                        return false;
                     }
                 }
 
@@ -219,9 +226,8 @@ namespace FlightLib
             }
 
             R.Close();
-
+            return true;
         }
-
         public List<Position> GuardarPosiciones()
         {
             List<Position> posiciones = new List<Position>();
