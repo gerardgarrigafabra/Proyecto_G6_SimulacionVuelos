@@ -29,6 +29,7 @@ namespace Interfaz
         }
         private void CrearInterfaz()
         {
+            // Configuración de la ventana principal
             this.Text = "Flight Control Simulator";
             this.BackColor = Color.FromArgb(240, 244, 249);
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -54,6 +55,7 @@ namespace Interfaz
 
         private void AplicarEstiloMenu()
         {
+            // Estilo del menú
             menuStrip1.BackColor = Color.FromArgb(30, 55, 85);
             menuStrip1.ForeColor = Color.White;
             menuStrip1.Font = new Font("Segoe UI", 10, FontStyle.Regular);
@@ -81,6 +83,7 @@ namespace Interfaz
 
         private void CrearBarraEstado()
         {
+            // Creamos una barra de estado en la parte inferior de la ventana principal
             StatusStrip barra = new StatusStrip();
 
             barra.BackColor = Color.FromArgb(30, 55, 85);
@@ -105,9 +108,10 @@ namespace Interfaz
         }
 
 
-
+        //Dependiendo de el boton, abrimos uno o otro formulario y nos pasamos la informacion
         private void introducciónDeDatosToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            
             Data1 form = new Data1();
 
             form.ShowDialog();
@@ -141,6 +145,7 @@ namespace Interfaz
 
         }
 
+        //Simulamos los vuelos y comprobamos si hay conflicto, si lo hay, preguntamos si queremos resolverlo automaticamente
         private void simulaciónDeVuelosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (F1 != null && F2 != null && tiempoCiclo != 0)
@@ -166,7 +171,7 @@ namespace Interfaz
                         }
                     }
                 }
-
+                //Si no hay conflicto, se haya resuelto o no, abrimos el formulario de simulación
                 SimulacionVuelos form = new SimulacionVuelos(listaAviones, tiempoCiclo, distSeguridad);
                 form.ShowDialog();
             }

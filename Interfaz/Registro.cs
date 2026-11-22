@@ -25,6 +25,7 @@ namespace Interfaz
 
         private void buttonRegistrar_Click(object sender, EventArgs e)
         {
+            //en caso que no exista el usuario, se registrara y se volvera al formulario de login
             string nombre = textBoxUsuario.Text;
             string contrasena = textBoxPassword.Text;
 

@@ -28,6 +28,7 @@ namespace Interfaz
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            //nos quedamos con la fila seleccionada y abrimos el formulario PlaneDistance con los datos del avión seleccionado
             int fila = e.RowIndex;           
             PlaneDistance form = new PlaneDistance(listaAviones, fila);
             form.ShowDialog();
@@ -35,7 +36,7 @@ namespace Interfaz
 
         private void DataGridForm_Load(object sender, EventArgs e)
         {
-
+            //BLO2
             dataGridView1.Columns.Add("Col1", "ID");
             dataGridView1.Columns.Add("ColCompany", "Compañía");
             dataGridView1.Columns.Add("Col2", "Velocidad");

@@ -44,6 +44,7 @@ namespace FlightLib
             historialposiciones.Clear();
         }
 
+        // Funcio que mou tots els avions de la llista
         public void Mover(double tiempo)
         {
             historialposiciones.Push(GuardarPosiciones()); // Guardem les posicions abans de moure els avions
@@ -193,7 +194,7 @@ namespace FlightLib
             return true; // No s'ha pogut trobar una combinació sense conflictes (els vols originals queden intactes)
         }
 
-
+        // Funció que llegeix un fitxer de text amb els plans de vol i els afegeix a la llista (BLO3)
         public bool leerFichero(string fichero)
         {
             StreamReader R = new StreamReader(fichero);
@@ -228,6 +229,8 @@ namespace FlightLib
             R.Close();
             return true;
         }
+
+        // Funció que guarda les posicions actuals de tots els avions en una llista de Position
         public List<Position> GuardarPosiciones()
         {
             List<Position> posiciones = new List<Position>();
@@ -236,8 +239,9 @@ namespace FlightLib
                 posiciones.Add(vector[i].GetCurrentPosition());
             }
             return posiciones;
-        } 
+        }
 
+        // Funció que restaura les posicions actuals de tots els avions basant-se en la llista
         public void RestaurarPosiciones(List<Position> posiciones)
         {
             for (int i = 0; i < vector.Count; i++)
@@ -246,6 +250,7 @@ namespace FlightLib
             }
         }
 
+        // Funció que desfa l'últim moviment dels avions,amb el stack
         public bool DeshacerPaso()
         {
             if (historialposiciones.Count > 0)
@@ -258,6 +263,8 @@ namespace FlightLib
                 return false;
             }
         }
+
+        // Funció que guarda la llista de plans de vol en un fitxer de text (BLO3)
         public void guardarFichero(string fichero)
         {
             StreamWriter W = new StreamWriter(fichero);

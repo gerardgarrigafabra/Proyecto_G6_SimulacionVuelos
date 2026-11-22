@@ -41,6 +41,7 @@ namespace Interfaz
                     Convert.ToDouble(velocidad2.Text)
                 );
 
+                //Comprovem que les dades siguin correctes
                 if (F1.GetVelocidad() < 0 || F2.GetVelocidad() < 0)
                 {
                     MessageBox.Show("ERROR: La velocidad no puede ser negativa");
@@ -74,7 +75,7 @@ namespace Interfaz
         }
         private void buttonAutomatico_Click(object sender, EventArgs e)
         {
-
+            //Valors per defecte
             id1.Text = "A";
             initialPositionX1.Text = "20";
             initialPositionY1.Text = "20";
@@ -120,7 +121,7 @@ namespace Interfaz
                         listaAviones = new FlightPlanList();
                         return;
                     }
-                    if (listaAviones.GetListSize() < 2)
+                    if (listaAviones.GetListSize() < 2) //Comprovem que hi hagi almenys 2 vols
                     {
                         MessageBox.Show("ERROR: el fichero debe contener al menos 2 vuelos");
                         listaAviones = new FlightPlanList();
@@ -144,6 +145,7 @@ namespace Interfaz
 
         private void Data1_Load(object sender, EventArgs e)
         {
+            //Amb tots els forms, apliquem el tema visual.
             TemaVisual.Aplicar(this);
         }
     }

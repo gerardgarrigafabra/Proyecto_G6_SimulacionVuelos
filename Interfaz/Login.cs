@@ -20,6 +20,7 @@ namespace Interfaz
         {
             InitializeComponent();
 
+            //miramos si existe la base de datos
             bool existeBD = usuarios.CrearBaseDeDatos();
 
             if (existeBD == false)
@@ -34,6 +35,7 @@ namespace Interfaz
 
         private void buttonEntrar_Click(object sender, EventArgs e)
         {
+            //comprobamos si es correcto
             if (usuarios.Autenticar(textBoxUsuario.Text, textBoxPassword.Text) == true)
             {
                 autenticado = true;
@@ -46,7 +48,7 @@ namespace Interfaz
         }
         private void buttonRegistrar_Click(object sender, EventArgs e)
         {
-           
+            //si no se tiene usuario, se abre el formulario de registro
             Registro form = new Registro(usuarios);
             form.ShowDialog();
         }

@@ -24,6 +24,7 @@ namespace Interfaz
         {
             try
             {
+                //cargamos datos y comprobamos que no sean negativos
                 tiempoCiclo = Convert.ToInt32(tiempoCiclo1.Text);
                 distSeguridad = Convert.ToInt32(distanciaSeguridad1.Text);
                 MessageBox.Show("Datos introducidos correctamente");
@@ -45,6 +46,7 @@ namespace Interfaz
         }
         private void buttonAutomatico2_Click(object sender, EventArgs e)
         {
+            //por defecto
             distanciaSeguridad1.Text = "50";
             tiempoCiclo1.Text = "10";
         }

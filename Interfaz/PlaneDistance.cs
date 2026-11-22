@@ -13,7 +13,6 @@ namespace Interfaz
 {
     public partial class PlaneDistance : Form
     {
-        FlightPlan F1, F2;
         FlightPlanList listaAviones;
         int fila;
 
@@ -30,7 +29,7 @@ namespace Interfaz
             dataGridView1.Columns.Add("Col1", "ID");
             dataGridView1.Columns.Add("ColCompany", "Compañía");
             dataGridView1.Columns.Add("ColDistancia", "Distancia");
-
+            //añadimos a la tabla los datos de los aviones y la distancia entre ellos
             for (int i = 0; i < listaAviones.GetListSize(); i++)
             {
                 if (listaAviones.GetFlightPlan(i) != listaAviones.GetFlightPlan(fila))

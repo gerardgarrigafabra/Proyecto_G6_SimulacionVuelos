@@ -23,6 +23,7 @@ namespace Interfaz
 
         private void InfoAvion_Load(object sender, EventArgs e)
         {
+            //Cargamos la ibformación del avión escogido en los textboxes
             txtId.Text = avionEscogido.GetId();
             txtVelocidad.Text = avionEscogido.GetVelocidad().ToString();
             txtPosicion.Text = avionEscogido.GetCurrentPosition().GetX().ToString() + ", " + avionEscogido.GetCurrentPosition().GetY().ToString();

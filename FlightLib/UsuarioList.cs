@@ -11,6 +11,8 @@ namespace FlightLib
     public class UsuarioList
     {
         string conexion = "Data Source=usuarios.db;Version=3;";
+
+        //Fem servir SQLite per la base de dades. 
         public bool ExisteBaseDeDatos()
         {
             if (File.Exists("usuarios.db"))
@@ -73,6 +75,7 @@ namespace FlightLib
             return cantidad > 0;
         }
 
+        //Apliquem la funcio de existe per comprovar si existeix i sino l'afegim
         public bool Registrar(string nombre, string contrasena)
         {
             if (Existe(nombre) == true)

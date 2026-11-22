@@ -17,7 +17,7 @@
                 double velocidad;
                 string company = "-";
 
-        // Constructures
+                // Constructures
                 public FlightPlan(string id, double cpx, double cpy, double fpx, double fpy, double velocidad)
                 {
                     this.id = id;
@@ -35,7 +35,7 @@
                 public string GetId()
                 {
                     return this.id;
-                 }
+                }
 
                 public void SetVelocidad(double velocidad) // setter del atributo velocidad
                 {
@@ -75,6 +75,15 @@
                 {
                     return this.finalPosition;
                 }
+                public void SetCompany(string company)
+                {
+                    this.company = company;
+                }
+
+                public string GetCompany()
+                {
+                    return this.company;
+                }
 
                 // Restart
                 public void Restart()
@@ -82,6 +91,7 @@
                     this.currentPosition = this.initialPosition;
                 }
 
+                // Distancia entre dos vuelos
                 public double Distancia(FlightPlan plan)
                 {
                     return this.currentPosition.Distancia(plan.currentPosition);
@@ -105,7 +115,7 @@
                     double y = currentPosition.GetY() + distancia * seno;
 
                     Position nextPosition = new Position(x, y);
-
+                    // La nueva posicion la aplicamos si aun no hemos llegado al final
                     if (currentPosition.Distancia(nextPosition) < hipotenusa)
                         currentPosition = nextPosition;
                     else
@@ -121,6 +131,8 @@
             
                     return resultado;
                 }
+                
+                //Funcio que calcula, amb la derivada de la funció de moviment, el temps que tardaràn en arribar.
                 public double TiempoMinimo(double rx, double ry, double vx, double vy, double duracion)
                 {
                     double velocidadCuadrado = vx * vx + vy * vy;
@@ -137,7 +149,7 @@
                         tiempo = duracion;
                     return tiempo;
                 }
-                // distancia min x segment
+                // distancia minima x segment
 
                 public double DistanciaTramo(double rx, double ry, double vx, double vy, double duracion)
                 {
@@ -150,7 +162,9 @@
                     return Math.Sqrt(x * x + y * y);
 
                 }
-                public double DistanciaMinima(FlightPlan otro)
+
+        // Funció que calcula la distancia mínima entre dos vols, tenint en compte que poden arribar a la seva destinació abans que l'altre
+        public double DistanciaMinima(FlightPlan otro)
                 {
                     Position posicionA = this.GetCurrentPosition();
                     Position posicionB = otro.GetCurrentPosition();
@@ -216,7 +230,7 @@
                             distanciaMinima = d1;
                     }
 
-                    // Segon tram: uno ja ha arribat i l'altre segueix movent-se
+                    // Segon tram: un ja ha arribat i l'altre segueix movent-se
                     if (seMueveA && seMueveB)
                     {
                         if (tiempoLlegadaA < tiempoLlegadaB)
@@ -343,7 +357,9 @@
 
                 return false;
                 }
-                
+
+
+                // Funció per comprovar si hi ha un conflicte amb un altre vol
                 public bool Conflicto(FlightPlan b, double distanciaSeguridad)
                 {
                     bool conflicto = false;
@@ -363,15 +379,6 @@
                     if(this.HasArrived())
                         Console.WriteLine("Ha llegado al destino");
                     Console.WriteLine("******************************");
-                }
-                public void SetCompany(string company)
-                {
-                    this.company = company;
-                }
-
-                public string GetCompany()
-                {
-                return this.company;
                 }
 
             }

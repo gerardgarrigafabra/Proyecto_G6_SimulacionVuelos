@@ -26,13 +26,15 @@ namespace Interfaz
         public SimulacionVuelos(FlightPlanList listaAviones, int tiempoCiclo, int distSeguridad)
         {
             InitializeComponent();
+            TemaVisual.Aplicar(this);
+
             this.listaAviones = listaAviones;
             this.tiempoCiclo = tiempoCiclo;
             this.distanciaSeguridad = distSeguridad;
-            TemaVisual.Aplicar(this);
 
         }
 
+        //Dibujamos las lineas de los vuelos y los circulos de seguridad
         private void Panel_Paint(object sender, PaintEventArgs e)
         {   
             for ( int i = 0; i < listaAviones.GetListSize(); i++ )
@@ -61,6 +63,7 @@ namespace Interfaz
             }
         }
 
+        //Movemos los aviones y comprobamos si hay conflicto, en caso de que lo haya, mostramos un mensaje de alerta
         private void Mover_Click(object sender, EventArgs e)
         {
             historialposiciones.Push(listaAviones.GuardarPosiciones());
@@ -96,6 +99,7 @@ namespace Interfaz
                 MessageBox.Show("Los vuelos no entrarán en conflicto.");
         }
 
+        // Movimiento automatico de los aviones, cada 100 milisegundos se mueve un paso
         private void MovAuto_Click(object sender, EventArgs e)
         {
             if (AutoMov.Text == "Movimiento Automatico")
@@ -114,12 +118,14 @@ namespace Interfaz
 
         private void MostarVuelosBtn_Click(object sender, EventArgs e)
         {
+            // Abrimos un formulario que muestra los vuelos en una tabla
             DataGridForm form = new DataGridForm(listaAviones);
             form.ShowDialog();
         }
 
         private void CambiarVelocidadBtn_Click(object sender, EventArgs e)
         {
+            // Cambiamos la velocidad de un vuelo, si no existe el vuelo con esa ID, mostramos un mensaje de error
             try
             {
                 int nuevaVel = Convert.ToInt32(textBoxNuevaVelocidad.Text);
@@ -155,7 +161,6 @@ namespace Interfaz
             }
         }
 
-
         private void SimulacionVuelos_Load(object sender, EventArgs e)
         {
             Panel.Dock = DockStyle.None;
@@ -187,6 +192,7 @@ namespace Interfaz
 
         private void evento(object sender, EventArgs e)
         {
+            // Al hacer clic en un avión, se abre un formulario con la información del vuelo
             PictureBox p = (PictureBox)sender;
             FlightPlan avionEscogido = (FlightPlan)p.Tag;
 
@@ -196,6 +202,7 @@ namespace Interfaz
 
         private void deshacerBtn_Click(object sender, EventArgs e)
         {
+            // Deshacemos el último movimiento de los aviones, si no hay movimientos para deshacer, mostramos un mensaje de error
             timer1.Stop();
             AutoMov.Text= "Movimiento Automatico";
             if (listaAviones.DeshacerPaso()==true)
@@ -208,7 +215,7 @@ namespace Interfaz
                         Convert.ToInt32(listaAviones.GetFlightPlan(i).GetCurrentPosition().GetX()) - 10,
                         Convert.ToInt32(listaAviones.GetFlightPlan(i).GetCurrentPosition().GetY()) - 10);
                 }
-                if (listaAviones.HayConflicto(distanciaSeguridad) == true)
+                if (listaAviones.HayConflicto(distanciaSeguridad) == true) //volvemos a comprobar si hay conflicto despues de deshacer el paso
                 {
                     labelAlarma.Text = ("¡ALERTA! Vuelos En Conflicto");
                     labelAlarma.Visible = true;
@@ -226,8 +233,7 @@ namespace Interfaz
 
         private void buttonGuardar_Click(object sender, EventArgs e)
         {
-     
-           
+            // Guardamos los planes de vuelo en un fichero de texto, si no se puede guardar, mostramos un mensaje de error
             timer1.Stop();
             AutoMov.Text = "Movimiento Automatico";
 
@@ -260,6 +266,7 @@ namespace Interfaz
 
         private void reiniciarBtn_Click(object sender, EventArgs e)
         {
+            // Reiniciamos la simulación, los aviones vuelven a su posición inicial y se borra el historial de movimientos
             timer1.Stop();
             AutoMov.Text = "Movimiento Automatico";
 
